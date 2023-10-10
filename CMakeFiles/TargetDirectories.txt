@@ -1,0 +1,3 @@
+/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles/main.dir
+/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles/edit_cache.dir
+/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles/rebuild_cache.dir
