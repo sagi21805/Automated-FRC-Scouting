@@ -1,6 +1,12 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/c++/src/test.cpp.o"
-  "CMakeFiles/main.dir/c++/src/test.cpp.o.d"
+  "CMakeFiles/main.dir/c++/src/field.cpp.o"
+  "CMakeFiles/main.dir/c++/src/field.cpp.o.d"
+  "CMakeFiles/main.dir/c++/src/main.cpp.o"
+  "CMakeFiles/main.dir/c++/src/main.cpp.o.d"
+  "CMakeFiles/main.dir/c++/src/robot.cpp.o"
+  "CMakeFiles/main.dir/c++/src/robot.cpp.o.d"
+  "CMakeFiles/main.dir/c++/src/test2.cpp.o"
+  "CMakeFiles/main.dir/c++/src/test2.cpp.o.d"
   "main"
   "main.pdb"
 )

@@ -34,8 +34,8 @@ def add_contrast(img):
 
   
 def main():
-    # cap = cv2.VideoCapture("/home/sagi/Desktop/vscode/Automated-FRC-Scouting/data/example_vid.mp4")  
-    
+    # cap = cv2.VideoCapture("/home/sagi/Desktop/vscode/Automated-FRC-Scouting/videoplayback.avi")  
+    # x = 0
     # while(1):         
     #     success, frame = cap.read()
     #     if success:  
@@ -46,27 +46,26 @@ def main():
     #         # hsv = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
     #         # lower_blue = np.array([110,50,50]) 
     #         # upper_blue = np.array([130,255,255]) 
-    #         print("\n\n\n\n")
-    #         test = stable_color(frame, 2, 1)
+    #         # print("\n\n\n\n")
+    #         # test = stable_color(frame, 2, 1)
     #         # mask = cv2.inRange(hsv, lower_blue, upper_blue) 
     #         # sharpf = add_contrast(hsv)
-    #         # cv2.imshow('frame',frame) 
+    #         cv2.imshow('frame',frame) 
     #         # cv2.imshow('sharpf',sharpf) 
     #         # cv2.imshow('test',test) 
-
-    #         cv2.waitKey(0)
-    #     break
-    #     # else:
-    #     #     break
-    test = np.array([[[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]], 
-                     [[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]],
-                     [[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]], 
-                     [[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]]])
-    stable_color(test, 2, 3)
-
-    # Destroys all of the HighGUI windows. 
-    cv2.destroyAllWindows() 
-    
+    #         x += 1
+    #         cv2.waitKey(1)
+    # #     break
+    # #     # else:
+    # #     #     break
+    # print(x)
+    # # Destroys all of the HighGUI windows. 
+    # cv2.destroyAllWindows()
+    x = 0 
+    for i in range(1, 10000, 1):
+        for j in range(1, 10000, 1):
+            x += i * j
+    print(x)
     # release the captured frame 
     # cap.release() 
     
