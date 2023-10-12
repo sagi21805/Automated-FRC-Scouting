@@ -1,5 +1,5 @@
-CMakeFiles/main.dir/c++/src/field.cpp.o: \
- /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/field.cpp \
+CMakeFiles/main.dir/c++/src/img_algs.cpp.o: \
+ /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/img_algs.cpp \
  /usr/include/stdc-predef.h /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -356,8 +356,4 @@ CMakeFiles/main.dir/c++/src/field.cpp.o: \
  /usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
- /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/include/field.hpp \
- /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/include/robot.hpp \
- /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/include/byte.hpp \
- /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/include/img_algs.hpp
+ /usr/local/include/opencv4/opencv2/video/background_segm.hpp

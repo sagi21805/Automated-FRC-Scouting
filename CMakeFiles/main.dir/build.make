@@ -83,10 +83,24 @@ CMakeFiles/main.dir/c++/src/field.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/c++/src/field.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/field.cpp -o CMakeFiles/main.dir/c++/src/field.cpp.s
 
+CMakeFiles/main.dir/c++/src/img_algs.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/c++/src/img_algs.cpp.o: c++/src/img_algs.cpp
+CMakeFiles/main.dir/c++/src/img_algs.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/c++/src/img_algs.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/c++/src/img_algs.cpp.o -MF CMakeFiles/main.dir/c++/src/img_algs.cpp.o.d -o CMakeFiles/main.dir/c++/src/img_algs.cpp.o -c /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/img_algs.cpp
+
+CMakeFiles/main.dir/c++/src/img_algs.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/c++/src/img_algs.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/img_algs.cpp > CMakeFiles/main.dir/c++/src/img_algs.cpp.i
+
+CMakeFiles/main.dir/c++/src/img_algs.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/c++/src/img_algs.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/img_algs.cpp -o CMakeFiles/main.dir/c++/src/img_algs.cpp.s
+
 CMakeFiles/main.dir/c++/src/main.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/c++/src/main.cpp.o: c++/src/main.cpp
 CMakeFiles/main.dir/c++/src/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/c++/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/c++/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/c++/src/main.cpp.o -MF CMakeFiles/main.dir/c++/src/main.cpp.o.d -o CMakeFiles/main.dir/c++/src/main.cpp.o -c /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/main.cpp
 
 CMakeFiles/main.dir/c++/src/main.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/main.dir/c++/src/main.cpp.s: cmake_force
 CMakeFiles/main.dir/c++/src/robot.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/c++/src/robot.cpp.o: c++/src/robot.cpp
 CMakeFiles/main.dir/c++/src/robot.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/c++/src/robot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/c++/src/robot.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/c++/src/robot.cpp.o -MF CMakeFiles/main.dir/c++/src/robot.cpp.o.d -o CMakeFiles/main.dir/c++/src/robot.cpp.o -c /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/robot.cpp
 
 CMakeFiles/main.dir/c++/src/robot.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/main.dir/c++/src/robot.cpp.s: cmake_force
 CMakeFiles/main.dir/c++/src/test2.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/c++/src/test2.cpp.o: c++/src/test2.cpp
 CMakeFiles/main.dir/c++/src/test2.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/c++/src/test2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/c++/src/test2.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/c++/src/test2.cpp.o -MF CMakeFiles/main.dir/c++/src/test2.cpp.o.d -o CMakeFiles/main.dir/c++/src/test2.cpp.o -c /home/sagi/Desktop/vscode/Automated-FRC-Scouting/c++/src/test2.cpp
 
 CMakeFiles/main.dir/c++/src/test2.cpp.i: cmake_force
@@ -128,6 +142,7 @@ CMakeFiles/main.dir/c++/src/test2.cpp.s: cmake_force
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/c++/src/field.cpp.o" \
+"CMakeFiles/main.dir/c++/src/img_algs.cpp.o" \
 "CMakeFiles/main.dir/c++/src/main.cpp.o" \
 "CMakeFiles/main.dir/c++/src/robot.cpp.o" \
 "CMakeFiles/main.dir/c++/src/test2.cpp.o"
@@ -136,6 +151,7 @@ main_OBJECTS = \
 main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/c++/src/field.cpp.o
+main: CMakeFiles/main.dir/c++/src/img_algs.cpp.o
 main: CMakeFiles/main.dir/c++/src/main.cpp.o
 main: CMakeFiles/main.dir/c++/src/robot.cpp.o
 main: CMakeFiles/main.dir/c++/src/test2.cpp.o
@@ -156,7 +172,7 @@ main: /usr/local/lib/libopencv_flann.so.4.8.0
 main: /usr/local/lib/libopencv_imgproc.so.4.8.0
 main: /usr/local/lib/libopencv_core.so.4.8.0
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sagi/Desktop/vscode/Automated-FRC-Scouting/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

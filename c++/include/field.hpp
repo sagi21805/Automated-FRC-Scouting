@@ -9,16 +9,17 @@ class Field{
 
     private:
         char *pathToGame; 
-        Robot blueTeam[3]; //commented because no defualt constructor
-        Robot redTeam[3]; //commented because no defualt constructor
+        Robot blueTeam[3]; 
+        Robot redTeam[3]; 
         Mat currentFrame;
         Mat lastFrame;
+        Mat mask; //temporary.
 
 
     public:
         Field(char *path); //avilable "/home/sagi/Downloads/videoplayback.mp4" and /same/path/dcmp.mp4  
         void run();
-        void findRobots();
+        Size* findRobots();
         void followRobot();
 
 

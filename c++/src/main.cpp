@@ -4,8 +4,9 @@
 
 
 int main(){
-    Field f("/home/sagi/Downloads/videoplayback.mp4");
+    Field f("/home/sagi/Downloads/dcmp.mp4");
     f.run();
+    
 }
 
 

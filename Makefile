@@ -153,6 +153,30 @@ c++/src/field.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/c++/src/field.cpp.s
 .PHONY : c++/src/field.cpp.s
 
+c++/src/img_algs.o: c++/src/img_algs.cpp.o
+.PHONY : c++/src/img_algs.o
+
+# target to build an object file
+c++/src/img_algs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/c++/src/img_algs.cpp.o
+.PHONY : c++/src/img_algs.cpp.o
+
+c++/src/img_algs.i: c++/src/img_algs.cpp.i
+.PHONY : c++/src/img_algs.i
+
+# target to preprocess a source file
+c++/src/img_algs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/c++/src/img_algs.cpp.i
+.PHONY : c++/src/img_algs.cpp.i
+
+c++/src/img_algs.s: c++/src/img_algs.cpp.s
+.PHONY : c++/src/img_algs.s
+
+# target to generate assembly for a file
+c++/src/img_algs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/c++/src/img_algs.cpp.s
+.PHONY : c++/src/img_algs.cpp.s
+
 c++/src/main.o: c++/src/main.cpp.o
 .PHONY : c++/src/main.o
 
@@ -237,6 +261,9 @@ help:
 	@echo "... c++/src/field.o"
 	@echo "... c++/src/field.i"
 	@echo "... c++/src/field.s"
+	@echo "... c++/src/img_algs.o"
+	@echo "... c++/src/img_algs.i"
+	@echo "... c++/src/img_algs.s"
 	@echo "... c++/src/main.o"
 	@echo "... c++/src/main.i"
 	@echo "... c++/src/main.s"

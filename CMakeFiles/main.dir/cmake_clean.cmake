@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/c++/src/field.cpp.o"
   "CMakeFiles/main.dir/c++/src/field.cpp.o.d"
+  "CMakeFiles/main.dir/c++/src/img_algs.cpp.o"
+  "CMakeFiles/main.dir/c++/src/img_algs.cpp.o.d"
   "CMakeFiles/main.dir/c++/src/main.cpp.o"
   "CMakeFiles/main.dir/c++/src/main.cpp.o.d"
   "CMakeFiles/main.dir/c++/src/robot.cpp.o"
