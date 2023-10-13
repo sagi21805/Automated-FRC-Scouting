@@ -12,22 +12,27 @@ Field::Field(char *path){
 
 void Field::run(){
     VideoCapture cap(this->pathToGame);
+	
 	vector<Mat> a; 
+
 	if (!cap.isOpened()){
 			printf("the frame is empty, program stopped.");
 			return;
 		}
 	cap.read(this->currentFrame);
-	Mat edge;
+
 	Mat blank;
+
+	Mat red;
+
+	Mat blue;
 
 	short int skipFrames = 7; 
 	
-	// cout << stableColor() << endl;
 	while (true){	
-	
+		
+		
 		this->lastFrame = this->currentFrame; 
-		// resize(this->lastFrame, this->lastFrame, Size(6, 340));
 
 		cap.read(this->currentFrame);
 
@@ -35,14 +40,25 @@ void Field::run(){
 			return;
 		}
 
+		this->currentFrame = stableColor(this->currentFrame, 1);
+		
+		cvtColor(this->currentFrame, this->currentFrame, COLOR_BGR2HSV);
+
+		blue = filterBlue(this->currentFrame);
+		
+		red = filterRed(this->currentFrame);
+
+		cvtColor(this->currentFrame, this->currentFrame, COLOR_HSV2BGR);
+
+		// resize(blue, blue, Size(640, 340));
+		// resize(red, red, Size(640, 340));
 		// resize(currentFrame, currentFrame, Size(640, 340));
 
-		this->currentFrame = stableColor(this->currentFrame, 2);
-		
-		// Canny(this->currentFrame, edge, 255, 255/3);
-
-
 		imshow("video", this->currentFrame);
+		imshow("red", red);
+		imshow("blue", blue);
+
+
 		waitKey(1);
 
 		for (int i = 0; i < skipFrames; i++){

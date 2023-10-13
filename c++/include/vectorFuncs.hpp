@@ -21,18 +21,6 @@ std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector){
     return os;
 }
 
-// template <typename S>
-// std::ostream& operator<<(std::ostream& os, const std::vector<vector<S>>& vector){
-//     // Printing all the elements
-//     // using <<
-//     os << "[";
-//     for (auto element : vector) {
-//         os << element << " ";
-//     }
-//     os << "\b]";
-//     return os;
-// }
-
 vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape);
 
 #endif

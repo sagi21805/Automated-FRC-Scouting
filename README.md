@@ -31,7 +31,7 @@ make -j4
 sudo make install 
 `
 
-##Install cnpy
+## Install cnpy
 
 `
 cd ~

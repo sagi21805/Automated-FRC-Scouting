@@ -11,3 +11,7 @@ Mat stableColor(Mat frame, short int blockSize);
 int maxPool2D(Mat block);
 
 int minPool2D(Mat block);
+
+Mat filterRed(Mat frame);
+
+Mat filterBlue(Mat frame);

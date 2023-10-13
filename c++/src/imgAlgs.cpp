@@ -50,7 +50,7 @@ int minPool2D(Mat frame){
 
 // TODO make more generic and effiecient 
 vector<Mat> colorFilter(Mat frame, short int blockSize){
-	// three because it is a colored img.
+// three because it is a colored img.
 	short int stride = blockSize;
 	vector<Mat> out(2);
 	vector<Mat> bgr(3);
@@ -95,27 +95,20 @@ vector<Mat> colorFilter(Mat frame, short int blockSize){
 	out[0] = red;
 	out[1] = blue;
 
-    return out;
+	return out;
 }
 
 Mat stableColor(Mat frame, short int blockSize){
 
-	//max pooling on red and blue and min pooling on green
+//max pooling on red and blue and min pooling on green
 
 	short int stride = blockSize;
-	
-	Mat working;
 
 	Mat out;
 
 	vector<Mat> bgr(3);
 
-	bilateralFilter(frame, working, 40, 120, 120);
-
-
-	split(working, bgr);
-
-	float thresh = 0.4; //between 0-1
+	split(frame, bgr);
 	//all the channels have the same num of rows and cols
 	short int rows = bgr[0].rows; // y axis
 	short int cols = bgr[0].cols; // x axis
@@ -125,17 +118,16 @@ Mat stableColor(Mat frame, short int blockSize){
 			for (int pixel = 0, pixelStop = cols - blockSize; pixel < pixelStop; pixel+=stride){
 				
 				Mat block = bgr[d](cv::Range(row, row + blockSize), cv::Range(pixel, pixel + blockSize));
-				//TODO make better 
+				//TODO make better
+				short int poolval = maxPool2D(block);
 
-				short int poolval = 0;
+				// if (d % 2 == 0){
+				// 	poolval = maxPool2D(block);
+				// }
+				// else{
+				// 	poolval = minPool2D(block);
+				// }
 
-				if (d % 2 == 0){
-					poolval = maxPool2D(block);
-				}
-				else{
-					// poolval = minPool2D(block);
-					poolval = maxPool2D(block);
-				}
 				for (int y = 0; y < blockSize; ++y){
 					for (int x = 0; x < blockSize; ++x){
 						bgr[d].at<uchar>(row + y, pixel + x) = poolval;
@@ -150,7 +142,31 @@ Mat stableColor(Mat frame, short int blockSize){
 	}
 	merge(bgr, out);
 
-    return out;
+	return out;
+}
+
+
+Mat filterRed(Mat frame){
+	Mat filter;
+
+	Mat lower({100, 50, 50});
+	Mat upper({141, 255, 255});
+
+	inRange(frame, lower, upper, filter);
+
+	return filter;
+
+}
+
+Mat filterBlue(Mat frame){
+	Mat filter;
+
+	Mat lower({160, 80, 80});
+	Mat upper({175, 255, 255});
+
+	inRange(frame, lower, upper, filter);
+
+	return filter;
 }
 
 Mat cutField(){
@@ -160,5 +176,3 @@ Mat cutField(){
 
 
 //TODO make alg that cuts only the field from the video
-//TODO dont use every frame 
-//TODO stride the blocks a larger distance
