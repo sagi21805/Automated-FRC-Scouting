@@ -10,18 +10,23 @@ sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config
 `
 cd ~
 `
+
 `
 git clone https://github.com/rogersce/cnpy.git
 `
+
 `
 cd mkdir -p build && cd build
 `
+
 `
 cmake ../cnpy
 `
+
 `
 make -j4
 `
+
 `
 sudo make install 
 `
@@ -31,18 +36,23 @@ sudo make install
 `
 cd ~
 `
+
 `
 git clone https://github.com/rogersce/cnpy.git
 `
+
 `
 cd mkdir -p build && cd build
 `
+
 `
 cmake ../cnpy
 `
+
 `
 make -j4
 `
+
 `
 sudo make install 
 `
