@@ -1,12 +1,12 @@
-#Installation
+# Installation
 
-##Install cmake`
+## Install cmake
 
 `
 sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config 
 `
 
-##Install OpenCV
+## Install OpenCV
 `
 cd ~
 `
@@ -47,7 +47,7 @@ make -j4
 sudo make install 
 `
 
-#for python modules
+# for python modules
 `
 pip install -r requirements.txt
 `
