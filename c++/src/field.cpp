@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include "field.hpp"
 #include <stdio.h>
-#include "img_algs.hpp"
+#include "imgAlgs.hpp"
 
 using namespace std;
 
@@ -18,12 +18,12 @@ void Field::run(){
 			return;
 		}
 	cap.read(this->currentFrame);
+	Mat edge;
 	Mat blank;
 
 	short int skipFrames = 7; 
 	
 	// cout << stableColor() << endl;
-
 	while (true){	
 	
 		this->lastFrame = this->currentFrame; 
@@ -38,9 +38,11 @@ void Field::run(){
 		// resize(currentFrame, currentFrame, Size(640, 340));
 
 		this->currentFrame = stableColor(this->currentFrame, 2);
+		
+		// Canny(this->currentFrame, edge, 255, 255/3);
 
 
-		imshow("video", currentFrame);
+		imshow("video", this->currentFrame);
 		waitKey(1);
 
 		for (int i = 0; i < skipFrames; i++){

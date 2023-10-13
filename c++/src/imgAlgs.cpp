@@ -1,9 +1,11 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
+#include "imgAlgs.hpp"
 
 using namespace cv;
 using namespace std;
 
+//doc
 int maxPool2D(Mat frame){
 
 	short int rows = frame.rows;
@@ -101,12 +103,17 @@ Mat stableColor(Mat frame, short int blockSize){
 	//max pooling on red and blue and min pooling on green
 
 	short int stride = blockSize;
+	
+	Mat working;
 
 	Mat out;
 
 	vector<Mat> bgr(3);
 
-	split(frame, bgr);
+	bilateralFilter(frame, working, 40, 120, 120);
+
+
+	split(working, bgr);
 
 	float thresh = 0.4; //between 0-1
 	//all the channels have the same num of rows and cols
@@ -119,11 +126,19 @@ Mat stableColor(Mat frame, short int blockSize){
 				
 				Mat block = bgr[d](cv::Range(row, row + blockSize), cv::Range(pixel, pixel + blockSize));
 				//TODO make better 
-				int max = maxPool2D(block);
 
+				short int poolval = 0;
+
+				if (d % 2 == 0){
+					poolval = maxPool2D(block);
+				}
+				else{
+					// poolval = minPool2D(block);
+					poolval = maxPool2D(block);
+				}
 				for (int y = 0; y < blockSize; ++y){
 					for (int x = 0; x < blockSize; ++x){
-						bgr[d].at<uchar>(row + y, pixel + x) = max;
+						bgr[d].at<uchar>(row + y, pixel + x) = poolval;
 
 					}
 				}

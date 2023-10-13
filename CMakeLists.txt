@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15) 
 PROJECT ( main )
-find_package(OpenCV REQUIRED )
 
+find_package(OpenCV REQUIRED )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
@@ -22,6 +22,6 @@ file(GLOB all_SRCS
         )
 
 
-add_executable(  ${PROJECT_NAME} ${all_SRCS} )
+add_executable(  ${PROJECT_NAME} ${all_SRCS})
 
-target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS} )
+target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS} "libcnpy.so")
