@@ -1,19 +1,21 @@
-// #include <stdio.h>
-#include "numpyArr.hpp"
+#include <stdio.h>
 #include <iostream>
+#include "cnpy.h"
+#include "vectorFuncs.hpp" 
+#include "NpyArrayFuncs.hpp"
 
-// void main(){
-//     std::vector<int> arr = loadNpArrInt("/home/sagi/Desktop/vscode/Automated-FRC-Scouting/data/arr2.npy");
- 
-// Driver Code
+using namespace cnpy;
+using namespace std;
+
 int main(){
-    std::vector<int> arr = loadNpArrInt("/home/sagi/Desktop/vscode/Automated-FRC-Scouting/data/arr2.npy");
+    NpyArray arr = npy_load("/home/sagi/Desktop/vscode/Automated-FRC-Scouting/data/arr2.npy");
 
-    // vector containing integer elements
-   
- 
-    std::cout << arr << std::endl;
- 
+    vector<vector<int>> vect = NpyTo2D(arr);
+    
+    cout << vect << endl;
+
+    cout << vect[0][0] << endl;
+
     return 0;
 }
 
