@@ -1,12 +1,13 @@
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <stdio.h>
-#include "imgAlgs.hpp"
+#include "imgAlgsGpu.hpp"
 #include "NpyArrayFuncs.hpp"
 #include "cnpy.h"
 #include "vectorFuncs.hpp"
+#include <opencv2/opencv.hpp>
+#include <opencv2/cudaimgproc.hpp>
+
+ 
 
 using namespace cv;
 using namespace std;
@@ -65,4 +66,34 @@ using namespace std;
 //     vector<vector<int>> v = NpyTo2D(arr);
 
 //     cout << v << endl;
+// }
+
+// int main(){
+//     std::cout << 0 << endl;
+
+//     cv::Mat img;
+//     cv::VideoCapture cap = cv::VideoCapture("/home/sagi/Downloads/dcmp.mp4");
+//     std::cout << 1 << endl;
+
+//     cap.read(img);
+//     std::cout << 2 << endl;
+
+//     cvtColor(img, img, COLOR_BGR2GRAY);
+
+//     cv::cuda::GpuMat dst, src;
+//     src.upload(img);
+//     std::cout << 3 << endl;
+
+//     cv::Ptr<cv::cuda::CLAHE> ptr_clahe = cv::cuda::createCLAHE(5.0, cv::Size(8, 8));
+    
+//     std::cout << 4 << endl;
+//     ptr_clahe->apply(src, dst);
+
+//     cv::Mat result;
+//     dst.download(result);
+
+//     std::cout << 5 << endl;
+
+//     cv::imshow("result", result);
+//     cv::waitKey(0);
 // }

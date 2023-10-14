@@ -1,7 +1,6 @@
 #ifndef __ROBOT__HPP
 #define __ROBOT__HPP
 #include <opencv2/opencv.hpp>
-#include "byte.hpp"
 
 
 class Robot{
@@ -11,12 +10,12 @@ class Robot{
         bool team; // red = false || blue = true
         cv::Size p1; //first cordinate of the bounding box 
         cv::Size p2; //second cordinate of the bounding box 
-        byte conesHigh;
-        byte conesMid;
-        byte conesLow;
-        byte cubesHigh;
-        byte cubesMid;
-        byte cubesLow;
+        short int conesHigh;
+        short int conesMid;
+        short int conesLow;
+        short int cubesHigh;
+        short int cubesMid;
+        short int cubesLow;
         //other params in the future
 
 
@@ -26,8 +25,8 @@ class Robot{
         int getTeamNumber();
         bool getTeam();
         cv::Size* getBox();
-        byte* getCones();
-        byte* getCubes();
+        short int* getCones();
+        short int* getCubes();
 
 };
 

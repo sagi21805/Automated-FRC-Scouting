@@ -1,5 +1,6 @@
-import torch
-print(torch.cuda.is_available()) # should be True
+import cv2
+import re
 
-t = torch.rand(10, 10).cuda()
-print(t.device) # should be CUDA
+cv_info = [re.sub('\s+', ' ', ci.strip()) for ci in cv2.getBuildInformation().strip().split('\n') 
+               if len(ci) > 0 and re.search(r'(nvidia*:?)|(cuda*:)|(cudnn*:)', ci.lower()) is not None]
+print(cv_info)

@@ -2,6 +2,7 @@
 #define __FIELD__HPP
 #include <opencv2/opencv.hpp>
 #include "robot.hpp"
+#include <opencv2/cudaarithm.hpp>
 
 using namespace cv;
 
@@ -11,8 +12,8 @@ class Field{
         char *pathToGame; 
         Robot blueTeam[3]; 
         Robot redTeam[3]; 
-        Mat currentFrame;
-        Mat lastFrame;
+        cuda::GpuMat currentFrame;
+        cuda::GpuMat lastFrame;
         Mat mask; //temporary.
 
 

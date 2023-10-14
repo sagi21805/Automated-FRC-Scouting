@@ -1,7 +1,9 @@
 #include <opencv2/opencv.hpp>
 #include "field.hpp"
 #include <stdio.h>
-#include "imgAlgs.hpp"
+#include "imgAlgsGpu.hpp"
+#include <opencv2/cudaarithm.hpp>
+#include <opencv2/cudaimgproc.hpp>
 
 using namespace std;
 
@@ -11,6 +13,9 @@ Field::Field(char *path){
 
 
 void Field::run(){
+
+	Mat currentFrame;
+
     VideoCapture cap(this->pathToGame);
 	
 	vector<Mat> a; 
@@ -19,42 +24,50 @@ void Field::run(){
 			printf("the frame is empty, program stopped.");
 			return;
 		}
-	cap.read(this->currentFrame);
+	cap.read(currentFrame);
+
+	this->currentFrame.upload(currentFrame);
 
 	Mat blank;
 
+	cuda::GpuMat redGpu;
+	cuda::GpuMat blueGpu;
 	Mat red;
-
 	Mat blue;
 
-	short int skipFrames = 7; 
+	short int skipFrames = 3; 
 	
 	while (true){	
 		
 		
+		
 		this->lastFrame = this->currentFrame; 
 
-		cap.read(this->currentFrame);
+		cap.read(currentFrame);
+
+		this->currentFrame.upload(currentFrame);
 
 		if (currentFrame.empty()){
 			return;
 		}
 
-		this->currentFrame = stableColor(this->currentFrame, 1);
-		
-		cvtColor(this->currentFrame, this->currentFrame, COLOR_BGR2HSV);
+		// this->currentFrame = stableColor(this->currentFrame);
 
-		blue = filterBlue(this->currentFrame);
-		
-		red = filterRed(this->currentFrame);
+		cuda::cvtColor(this->currentFrame, this->currentFrame, COLOR_BGR2HSV);
 
-		cvtColor(this->currentFrame, this->currentFrame, COLOR_HSV2BGR);
+		redGpu = filterRed(this->currentFrame);
+		blueGpu = filterBlue(this->currentFrame);
 
-		// resize(blue, blue, Size(640, 340));
-		// resize(red, red, Size(640, 340));
-		// resize(currentFrame, currentFrame, Size(640, 340));
+		cuda::cvtColor(this->currentFrame, this->currentFrame, COLOR_HSV2BGR);
 
-		imshow("video", this->currentFrame);
+		redGpu.download(red);
+		blueGpu.download(blue);
+		resize(blue, blue, Size(640, 340));
+		resize(red, red, Size(640, 340));
+		resize(currentFrame, currentFrame, Size(640, 340));
+
+
+		imshow("video", currentFrame);
 		imshow("red", red);
 		imshow("blue", blue);
 
