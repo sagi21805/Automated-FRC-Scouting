@@ -101,7 +101,7 @@ ln -s /usr/local/lib/python3.x/site-packages/cv2/python-3.x/cv2.cpython-3xm-x86_
  sudo make install 
 `
 
-# for python modules
+# install python modules
 `
  pip install -r requirements.txt
 `
