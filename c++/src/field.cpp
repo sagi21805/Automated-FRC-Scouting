@@ -7,8 +7,10 @@
 
 using namespace std;
 
-Field::Field(char *path){
-    this->pathToGame = path;
+Field::Field(const char *path){
+
+    this->pathToGame = strdup(path);
+
 }
 
 
@@ -18,10 +20,12 @@ void Field::run(){
 
     VideoCapture cap(this->pathToGame);
 	
+	cout << this->pathToGame << endl;
+
 	vector<Mat> a; 
 
 	if (!cap.isOpened()){
-			printf("the frame is empty, program stopped.");
+			printf("the frame is empty, program stopped.\n");
 			return;
 		}
 	cap.read(currentFrame);
@@ -80,10 +84,17 @@ void Field::run(){
 		// break;
 		
 	}
-	return;
+
+
 }
 
+Field::~Field(){
 
+	if (this->pathToGame != NULL){
+		free(this->pathToGame);
+	}
+
+}
 // Size* Field::findRobots(){
 
 // 	Mat rgb[3]; //[B, G, R]

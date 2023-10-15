@@ -1,6 +1,26 @@
-import cv2
-import re
+# import the module
+import ctypes  
+# load the library
+lib = ctypes.cdll.LoadLibrary('./build/libmain.so')
+  
+# create a Geek class
+class Test(object):
+  
+    # constructor
+    def __init__(self):
+  
+        # attribute
+        self.obj = lib.Test_new()
+  
+    # define method
+    def setX(self, x):
+        lib.setX(self.obj, x)
+        
+    def getX(self):
+        return lib.getX(self.obj)
 
-cv_info = [re.sub('\s+', ' ', ci.strip()) for ci in cv2.getBuildInformation().strip().split('\n') 
-               if len(ci) > 0 and re.search(r'(nvidia*:?)|(cuda*:)|(cudnn*:)', ci.lower()) is not None]
-print(cv_info)
+
+f = Test()
+
+f.setX(109)
+print(f.getX())

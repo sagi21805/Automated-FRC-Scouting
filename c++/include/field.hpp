@@ -8,7 +8,7 @@ using namespace cv;
 
 class Field{
 
-    private:
+    public:
         char *pathToGame; 
         Robot blueTeam[3]; 
         Robot redTeam[3]; 
@@ -18,7 +18,8 @@ class Field{
 
 
     public:
-        Field(char *path); //avilable "/home/sagi/Downloads/videoplayback.mp4" and /same/path/dcmp.mp4  
+        Field(const char *path); //avilable "/home/sagi/Downloads/videoplayback.mp4" and /same/path/dcmp.mp4  
+        ~Field();
         void run();
         Size* findRobots();
         void followRobot();
