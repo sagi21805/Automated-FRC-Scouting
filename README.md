@@ -3,47 +3,47 @@
 
 ## Install cmake
 
-`bash
+```bash
  sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config 
-`
+```
 
 ## Intall Cuda -->
  https://gist.github.com/denguir/b21aa66ae7fb1089655dd9de8351a202
 
 
 ## Install OpenCV + Cuda
-`bash
+```bash
 cd ~
-`
+```
 
-`bash
+```bash
  sudo apt install ffmpeg
-`
+```
 
-`bash
+```bash
  git clone https://github.com/opencv/opencv_contrib.git
-`
+```
 
-`bash
+```bash
  git clone https://github.com/opencv/opencv.git
-`
+```
 
-`bash
+```bash
  pip install virtualenv
  python3 -m venv ~/env
  source env/bin/activate
  pip install numpy
-`
+```
 
-`bash
+```bash
  cd opencv
-`
+```
 
-`bash
+```bash
  mkdir -p build && cd build
-`
+```
 
-`bash
+```bash
  cmake -B ./build \
       -D CMAKE_BUILD_TYPE=RELEASE \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -59,49 +59,49 @@ cd ~
       -D WITH_CUBLAS=ON \       
       -D CUDA_TOOLKIT_ROOT_DIR= /path/to/cudafolder \
       -D OpenCL_LIBRARY= /path/to/libOpenCL.so
-`
+```
 
-`bash
+```bash
  make -j4
-`
+```
 
-`bash
+```bash
  sudo make install 
  sudo ldconfig
-`
+```
 
-`bash
+```bash
 cd ~/env/lib/python3.x/site-packages/
 ln -s /usr/local/lib/python3.x/site-packages/cv2/python-3.x/cv2.cpython-3xm-x86_64-linux-gnu.so cv2.so
-`
+```
 
 ## Install cnpy
 
-`bash
+```bash
  cd ~
-`
+```
 
-`bash
+```bash
  git clone https://github.com/rogersce/cnpy.git
-`
+```
 
-`bash
+```bash
  cd mkdir -p build && cd build
-`
+```
 
-`bash
+```bash
  cmake ../cnpy
-`
+```
 
-`bash
+```bash
  make -j4
-`
+```
 
-`bash
+```bash
  sudo make install 
-`
+```
 
 # install python modules
-`bash
+```bash
  pip install -r requirements.txt
-`
+```
