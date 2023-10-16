@@ -6,7 +6,7 @@ cap = cv2.VideoCapture('/home/sagi/Downloads/dcmp.mp4')
 
 # model = YOLO('/home/sagi/Downloads/bumpers.pt')
 print("loading YOLO")
-modelBumpers = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train/weights/best.pt')
+modelBumpers = YOLO('./data/weights/best.pt')
 # modelGamePiece = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train3/weights/best.pt')
 print("DONE")
 
