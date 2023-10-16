@@ -7,13 +7,20 @@
 
 using namespace std;
 
+/*
+Field class Constructour
+Args:
+`path` = the path to the video.
+*/
 Field::Field(const char *path){
 
     this->pathToGame = strdup(path);
 
 }
 
-
+/*
+plays the video, and apply recogniton algs
+*/
 void Field::run(){
 
 	Mat currentFrame;
@@ -88,6 +95,9 @@ void Field::run(){
 
 }
 
+/*
+Field Destructour
+*/
 Field::~Field(){
 
 	if (this->pathToGame != NULL){

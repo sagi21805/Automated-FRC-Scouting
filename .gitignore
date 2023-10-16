@@ -1,2 +1,6 @@
 python/__pycache__
 build
+data/
+runs/*
+*.yaml
+*.pt

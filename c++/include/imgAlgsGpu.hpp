@@ -9,9 +9,9 @@ using namespace std;
 
 cuda::GpuMat stableColor(cuda::GpuMat frame);
 
-double maxPool2D(cuda::GpuMat frame);
+double max(cuda::GpuMat frame);
 
-double minPool2D(cuda::GpuMat frame);
+double min(cuda::GpuMat frame);
 
 cuda::GpuMat filterRed(cuda::GpuMat frame);
 

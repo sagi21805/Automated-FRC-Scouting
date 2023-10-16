@@ -4,6 +4,8 @@ lib = ctypes.CDLL('./build/libmain.so')
 
 FIELD_OBJECT = ctypes.POINTER(ctypes.c_char)
 
+
+
 class Field():
   
     def __init__(self, path: str):

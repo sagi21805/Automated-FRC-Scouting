@@ -7,8 +7,14 @@
 using namespace std;
 using namespace cv;
 
-//doc
-double maxPool2D(cuda::GpuMat frame){
+/*
+Find Maximum in a matrix
+Args:
+`frame` the frame being maxPooled
+return:
+`highest` the highest number in the frame
+*/
+double max(cuda::GpuMat frame){
 
 	double highest;
 	cuda::minMax(frame, NULL, &highest);
@@ -16,7 +22,14 @@ double maxPool2D(cuda::GpuMat frame){
 	return highest;
 }
 
-double minPool2D(cuda::GpuMat frame){
+/*
+Find Minimum a matrix
+Args:
+`frame` the frame being minPooled
+return:
+`lowest` the lowest number in the frame
+*/
+double min(cuda::GpuMat frame){
 
 	double lowest;
 	cuda::minMax(frame, &lowest, NULL);
@@ -24,23 +37,31 @@ double minPool2D(cuda::GpuMat frame){
 	return lowest;
 }
 
+/*
+Filters the Red color from a given frame.
+Args:
+`frame` the frame being minPooled
+Return:
+`filtered` the filtered Frame
+*/
 cuda::GpuMat filterRed(cuda::GpuMat frame){
 
-	cuda::GpuMat out;
+	cuda::GpuMat filtered;
 
 	Ptr<cuda::Filter> guassionFillter = cuda::createGaussianFilter(CV_8UC3, CV_8UC3, {5, 5}, 1, 1);
-	guassionFillter->apply(frame, out);
+	guassionFillter->apply(frame, filtered);
 
-	cuda::inRange(frame, {90, 45, 45}, {150, 255, 255}, out);
+	cuda::inRange(frame, {90, 45, 45}, {150, 255, 255}, filtered);
 
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 9));
 	Ptr<cuda::Filter> morph = cuda::createMorphologyFilter(MORPH_OPEN, CV_8UC1, kernel);
 
-	morph->apply(out, out);
+	morph->apply(filtered, filtered);
 
-	return out;
+	return filtered;
 
 }
+
 
 cuda::GpuMat filterBlue(cuda::GpuMat frame){
 
