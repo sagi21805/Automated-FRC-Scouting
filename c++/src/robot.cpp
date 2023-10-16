@@ -45,16 +45,16 @@ cv::Size* Robot::getBox(){
     return box;
 }
 
-byte* Robot::getCones(){
-    byte cones[3];
+short int* Robot::getCones(){
+    short int cones[3];
     cones[0] = this->conesHigh;
     cones[1] = this->conesMid;
     cones[2] = this->conesLow;
     return cones;
 }
 
-byte* Robot::getCubes(){
-    byte cubes[3];
+short int* Robot::getCubes(){
+    short int cubes[3];
     cubes[0] = this->conesHigh;
     cubes[1] = this->conesMid;
     cubes[2] = this->conesLow;

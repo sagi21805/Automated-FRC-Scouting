@@ -1,22 +1,34 @@
 #include <opencv2/opencv.hpp>
 #include "field.hpp"
 #include <stdio.h>
-#include "imgAlgs.hpp"
+#include "imgAlgsCpu.hpp"
 
 using namespace std;
 
-Field::Field(char *path){
-    this->pathToGame = path;
+/*
+Field class Constructour
+Args:
+`path` = the path to the video.
+*/
+Field::Field(const char *path){
+
+    this->pathToGame = strdup(path);
+
 }
 
-
+/*
+plays the video, and apply recogniton algs
+*/
 void Field::run(){
+
     VideoCapture cap(this->pathToGame);
 	
+	cout << this->pathToGame << endl;
+
 	vector<Mat> a; 
 
 	if (!cap.isOpened()){
-			printf("the frame is empty, program stopped.");
+			printf("the frame is empty, program stopped.\n");
 			return;
 		}
 	cap.read(this->currentFrame);
@@ -24,37 +36,37 @@ void Field::run(){
 	Mat blank;
 
 	Mat red;
-
 	Mat blue;
 
-	short int skipFrames = 7; 
+	short int skipFrames = 3; 
 	
 	while (true){	
+		
 		
 		
 		this->lastFrame = this->currentFrame; 
 
 		cap.read(this->currentFrame);
 
-		if (currentFrame.empty()){
+		if (this->currentFrame.empty()){
 			return;
 		}
 
-		this->currentFrame = stableColor(this->currentFrame, 1);
-		
-		cvtColor(this->currentFrame, this->currentFrame, COLOR_BGR2HSV);
+		// this->currentFrame = stableColor(this->currentFrame);
 
-		blue = filterBlue(this->currentFrame);
-		
+		cv::cvtColor(this->currentFrame, this->currentFrame, COLOR_BGR2HSV);
+
 		red = filterRed(this->currentFrame);
+		blue = filterBlue(this->currentFrame);
 
-		cvtColor(this->currentFrame, this->currentFrame, COLOR_HSV2BGR);
+		cv::cvtColor(this->currentFrame, this->currentFrame, COLOR_HSV2BGR);
 
-		// resize(blue, blue, Size(640, 340));
-		// resize(red, red, Size(640, 340));
-		// resize(currentFrame, currentFrame, Size(640, 340));
+		resize(blue, blue, Size(640, 340));
+		resize(red, red, Size(640, 340));
+		resize(currentFrame, currentFrame, Size(640, 340));
 
-		imshow("video", this->currentFrame);
+
+		imshow("video", currentFrame);
 		imshow("red", red);
 		imshow("blue", blue);
 
@@ -67,7 +79,19 @@ void Field::run(){
 		// break;
 		
 	}
-	return;
+
+
+}
+
+/*
+Field Destructour
+*/
+Field::~Field(){
+
+	if (this->pathToGame != NULL){
+		free(this->pathToGame);
+	}
+
 }
 
 
