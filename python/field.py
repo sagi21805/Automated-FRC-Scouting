@@ -19,7 +19,7 @@ class Field():
   
     def run(self):
         
-        lib.runField.argtypes = [FIELD_OBJECT]
+        lib.run.argtypes = [FIELD_OBJECT]
         
-        lib.runField(self.obj)
+        lib.run(self.obj)
         

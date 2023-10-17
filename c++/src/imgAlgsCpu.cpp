@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 #include "imgAlgsCpu.hpp"
+#include <cmath>
 
 using namespace std;
 using namespace cv;
@@ -97,6 +98,29 @@ bool intersectingRect(int *rectA, int *rectB, int x = 0){
 	return false;
 }
 
+/*
+gets all pair of points recognized by YOLO in python, and devides them into 6 different robots.
+Args:
+`points` array of points [[x1, y1, x2, y2], [x1, y1 ...] ...]
+`size` how many pairs of points are int the array
+*/
+Robot* stablePoints(int *points, short int size){
 
+	
+	for (short int i = 0; i < size - 1; i++){
+
+		if (pow(points[i] - points[i + 4], 2) + pow(points[i + 1] - points[i + 1 + 4], 2) <  125){
+			
+			for (short int k = i + 1; i < size -i -1 ; i++){
+
+			}
+
+		}
+
+	}
+	
+		
+
+}
 
 //TODO make alg that cuts only the field from the video

@@ -21,7 +21,7 @@ class Robot{
 
     public:
         Robot(); //defualt contructor
-        Robot(int teamNumbar, bool team, cv::Size p1, cv::Size p2);
+        Robot(int teamNumber, bool team, int p1[], int p2[]);
         int getTeamNumber();
         bool getTeam();
         cv::Size* getBox();

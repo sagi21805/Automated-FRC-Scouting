@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
+#include "robot.hpp"
 
 using namespace cv;
 using namespace std;
@@ -13,3 +14,5 @@ Mat filterRed(Mat frame);
 Mat filterBlue(Mat frame);
 
 bool intersectingRect(int *rectA, int *rectB, int x);
+
+Robot* stablePoints(int *points);

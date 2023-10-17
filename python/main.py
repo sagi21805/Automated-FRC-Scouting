@@ -1,8 +1,10 @@
 from field import Field
+from robot import Robot
+import numpy as np
 
+f = Field('/home/sagi/Downloads/dcmp.mp4')
 
-f = Field('/home/sagi21805/Downloads/dcmp.mp4')
+r = Robot()
 
-# print(f.pathToGame)
+r.test(np.array([[1, 3, 4], [1, 2, 3]], dtype=np.int32))
 
-f.run()

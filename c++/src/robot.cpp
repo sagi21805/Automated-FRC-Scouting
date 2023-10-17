@@ -1,13 +1,17 @@
 #include "robot.hpp"
 #include <opencv2/opencv.hpp>
+#include <stdio.h>
+#include "vectorFuncs.hpp"
+
 
 using namespace cv;
+using namespace std;
 
-Robot::Robot(int teamNumbar, bool team, Size p1, Size p2){
-    this->teamNumber = teamNumbar;
+Robot::Robot(int teamNumber, bool team, int p1[], int p2[]){
+    this->teamNumber = teamNumber;
     this->team = team;
-    this->p1 = p1;
-    this->p2 = p2;
+    this->p1 = Size(p1[0], p1[1]);
+    this->p2 = Size(p2[0], p2[1]);
     this->conesHigh = 0;
     this->conesMid = 0;
     this->conesLow = 0;
@@ -60,3 +64,4 @@ short int* Robot::getCubes(){
     cubes[2] = this->conesLow;
     return cubes;
 }
+
