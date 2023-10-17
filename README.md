@@ -1,3 +1,7 @@
+# Hi everyone 
+
+the goal of this project is to make automated scouting for frc.
+
 # Installation
 
 
@@ -7,17 +11,27 @@
  sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config 
 ```
 
-## Intall Cuda -->
- https://gist.github.com/denguir/b21aa66ae7fb1089655dd9de8351a202
+## Intall Cuda (Optional for gpu vesrion) -->
+
+https://gist.github.com/denguir/b21aa66ae7fb1089655dd9de8351a202
 
 
-## Install OpenCV + Cuda
+## Install OpenCV
+
 ```bash
 cd ~
 ```
 
 ```bash
  sudo apt install ffmpeg
+```
+
+```bash
+ sudo apt install pkg-config
+```
+
+```bash
+ sudo apt install ffmpeg libavformat-dev libavcodec-dev libswscale-dev
 ```
 
 ```bash
@@ -29,13 +43,6 @@ cd ~
 ```
 
 ```bash
- pip install virtualenv
- python3 -m venv ~/env
- source env/bin/activate
- pip install numpy
-```
-
-```bash
  cd opencv
 ```
 
@@ -43,6 +50,7 @@ cd ~
  mkdir -p build && cd build
 ```
 
+## Cuda vesrion --->
 ```bash
  cmake -B ./build \
       -D CMAKE_BUILD_TYPE=RELEASE \
@@ -61,13 +69,31 @@ cd ~
       -D OpenCL_LIBRARY= /path/to/libOpenCL.so
 ```
 
+## Regular vesrion --->
+```bash
+ cmake -B ./build \
+      -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_PYTHON_EXAMPLES=OFF \
+      -D INSTALL_C_EXAMPLES=OFF \
+      -D OPENCV_ENABLE_NONFREE=ON \      
+      -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+      -D PYTHON_EXECUTABLE=~/env/bin/python3 \
+      -D BUILD_EXAMPLES=ON \
+      -D OpenCL_LIBRARY= /path/to/libOpenCL.so
+
+```
+
 ```bash
  make -j4
 ```
 
 ```bash
  sudo make install 
- sudo ldconfig
+```
+
+```bash
+sudo ldconfig
 ```
 
 ```bash
