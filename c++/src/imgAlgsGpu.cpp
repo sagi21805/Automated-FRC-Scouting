@@ -62,7 +62,13 @@ cuda::GpuMat filterRed(cuda::GpuMat frame){
 
 }
 
-
+/*
+Filters the Blue color from a given frame.
+Args:
+`frame` the frame being minPooled
+Return:
+`filtered` the filtered Frame
+*/
 cuda::GpuMat filterBlue(cuda::GpuMat frame){
 
 	cuda::GpuMat out;

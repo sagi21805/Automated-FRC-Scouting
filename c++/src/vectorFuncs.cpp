@@ -5,6 +5,13 @@
 
 using namespace std;
 
+
+/*
+Turns a 1D vector into a 2D vector for a given 2D shape
+Arg:
+`input` the 1D input vector
+`newShape` the shape 2D the vector is being turned to
+*/
 vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape){
 
     if (newShape.size() != 2){

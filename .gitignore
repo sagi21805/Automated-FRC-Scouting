@@ -4,4 +4,4 @@ data/
 runs/*
 *.yaml
 *.pt
-.vscode
+**/.vscode/
