@@ -1,9 +1,8 @@
-python/__pycache__
-build
-data/
-runs/*
+# Byte-compiled / optimized / DLL files
+__pycache__
+data
+build 
+runs
 *.yaml
 *.pt
-.vscode
-runs
 **/.vscode/
