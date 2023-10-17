@@ -1,8 +1,6 @@
-#include <opencv2/cudaarithm.hpp>
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 #include "imgAlgsCpu.hpp"
-#include <opencv2/cudafilters.hpp>
 
 using namespace std;
 using namespace cv;

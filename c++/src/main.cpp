@@ -4,7 +4,10 @@
 
 
 int main(){
-    Field f("/home/sagi/Downloads/dcmp.mp4");
+
+    std::cout << ::getBuildInformation() << std::endl;
+
+    Field f("/home/sagi21805/Downloads/dcmp.mp4");
     f.run();
     
 }

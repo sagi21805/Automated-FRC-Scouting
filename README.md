@@ -14,6 +14,10 @@ cd ~
 `
 git clone https://github.com/rogersce/cnpy.git
 `
+sudo apt install ffmpeg
+sudo apt install pkg-config     
+sudo apt install ffmpeg libavformat-dev libavcodec-dev libswscale-dev 
+
 
 `
 cd mkdir -p build && cd build
