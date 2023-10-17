@@ -2,6 +2,12 @@
 
 the goal of this project is to make automated scouting for frc.
 
+for more information about the code check branches 
+
+**mainGpu**
+
+**mainCpu**
+
 # Installation
 
 
