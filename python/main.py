@@ -1,7 +1,7 @@
 from field import Field
 
 
-f = Field('/home/sagi/Downloads/dcmp.mp4')
+f = Field('/home/sagi21805/Downloads/dcmp.mp4')
 
 # print(f.pathToGame)
 
