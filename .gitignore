@@ -6,3 +6,4 @@ runs/*
 *.pt
 .vscode
 runs
+**/.vscode/
