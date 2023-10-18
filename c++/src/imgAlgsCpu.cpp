@@ -2,9 +2,25 @@
 #include <stdio.h>
 #include "imgAlgsCpu.hpp"
 #include <cmath>
+#include "vectorFuncs.hpp"
 
 using namespace std;
 using namespace cv;
+
+/*
+Skips given number of frames
+Args:
+`cap` the vidoe instance that is being captured
+`framesToSkip` the number of frames that is being skipped
+*/
+void skipFrames(VideoCapture cap, short int framesToSkip){
+
+	Mat blank;
+	for (int i = 0; i < framesToSkip; i++){
+		cap.read(blank);
+	}
+
+}
 
 /*
 Find Maximum in a matrix
@@ -99,28 +115,54 @@ bool intersectingRect(int *rectA, int *rectB, int x = 0){
 }
 
 /*
-gets all pair of points recognized by YOLO in python, and devides them into 6 different robots.
+Gets a sorted array of all the pairs of points recognized by YOLO in python, and removes similarities
 Args:
-`points` array of points [[x1, y1, x2, y2], [x1, y1 ...] ...]
-`size` how many pairs of points are int the array
+`points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
+`size` how many pairs of points are in the array
 */
-Robot* stablePoints(int *points, short int size){
+Robot* stablePoints(int points[], unsigned int size){
 
-	
+	int newShape[2] = {size, 4};
+
+	int** points2D = arr1Dto2D(points, newShape);
+
+	short int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
+	short int index = 0;
+	int out[size][4];
+
 	for (short int i = 0; i < size - 1; i++){
 
-		if (pow(points[i] - points[i + 4], 2) + pow(points[i + 1] - points[i + 1 + 4], 2) <  125){
-			
-			for (short int k = i + 1; i < size -i -1 ; i++){
+		if (isClose(points2D[i], points2D[i+1], 125)){
+
+			similar[index] = i;
+			similar[index + 1] = i + 1;
+
+			for (short int k = i + 1; k < size - i -1 ; k++){
+
+				if (isClose(points2D[k], points2D[k+1], 125) && isClose(points2D[i], points2D[k+1], (125-50) * (k-i+1.5))){
+					
+					similar[index + 1] = k + 1;
+
+				}
+				else{
+					i += k - i - 1;
+					break;
+				}
+
 
 			}
-
+			index+=2;
 		}
 
 	}
-	
-		
+
+	for (int i = 0; i < index; i+=2){
+		avrageVectorValues(points2D, i, i+1);
+	}
+
 
 }
+	
+		
 
 //TODO make alg that cuts only the field from the video

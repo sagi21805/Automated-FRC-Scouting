@@ -23,4 +23,10 @@ std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector){
 
 vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape);
 
+bool isClose(int* pointA, int* pointB, short int thresh);
+
+int* avrageVectorValues(int** vector, int locA, int locB);
+
+int** arr1Dto2D(int *input, int *newShape);
+
 #endif

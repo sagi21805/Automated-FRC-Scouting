@@ -5,6 +5,8 @@
 using namespace cv;
 using namespace std;
 
+void skipFrames(VideoCapture cap, short int framesToSkip);
+
 double max(Mat frame);
 
 double min(Mat frame);
@@ -15,4 +17,5 @@ Mat filterBlue(Mat frame);
 
 bool intersectingRect(int *rectA, int *rectB, int x);
 
-Robot* stablePoints(int *points);
+Robot* stablePoints(int points[], unsigned int size);
+

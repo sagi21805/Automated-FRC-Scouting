@@ -33,12 +33,8 @@ void Field::run(){
 		}
 	cap.read(this->currentFrame);
 
-	Mat blank;
-
 	Mat red;
 	Mat blue;
-
-	short int skipFrames = 3; 
 	
 	while (true){	
 		
@@ -73,9 +69,8 @@ void Field::run(){
 
 		waitKey(1);
 
-		for (int i = 0; i < skipFrames; i++){
-			cap.read(blank);
-		}
+		skipFrames(cap, 4);
+		
 		// break;
 		
 	}
