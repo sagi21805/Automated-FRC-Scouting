@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 import cv2
+from imgAlgs import stablePoints
 import numpy as np
-import numpy.lib.stride_tricks
-from numba import njit, prange
+import ctypes
 
 print("loading video")
 cap = cv2.VideoCapture('/home/sagi/Downloads/d2.mp4')
@@ -28,13 +28,14 @@ while cap.isOpened():
             boxes = r.boxes.cpu().numpy()
             b = boxes.xyxy.astype(int)
             s = b[b[:, 0].argsort()]
-            print(s)
-            for box in boxes:
-                r = box.xyxy[0].astype(int)
-                if box.cls[0] == 0:
-                    frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 1)
-                if box.cls[0] == 1:
-                    frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 1)
+            s = np.array(s, dtype=np.int32).flatten()
+            
+            out = np.empty((len(s) // 4, 4), dtype=np.int32)
+            stablePoints(s, ctypes.c_int32(len(s) // 4), out)
+            
+            for r in out:
+                frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 1)
+                # frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 1)
         
         
         # for r in resultsG:
@@ -45,8 +46,9 @@ while cap.isOpened():
         #             frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 5)
         #         if box.cls[0] == 1:
         #             frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 5)
-        cv2.imshow("f", frame)
-        cv2.waitKey(1)
+            frame = cv2.resize(frame, (1280, 640))
+            cv2.imshow("f", frame)
+            cv2.waitKey(1)
 
         # cv2.imshow("YOLOv8 Inference", annotated_frame)
 

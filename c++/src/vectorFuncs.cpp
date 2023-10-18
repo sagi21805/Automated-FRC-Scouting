@@ -51,16 +51,15 @@ int** arr1Dto2D(int *input, int *newShape){
     return out;
 }
 
-bool isClose(int* pointA, int* pointB, short int thresh){
-
-	return pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2) <  thresh;
+bool isClose(int* pointA, int* pointB, int thresh){
+	return (pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2) <  thresh);
 
 }
 
-int* avrageVectorValues(int** inputArr, int startLoc, int stopLoc){
+void avrageVectorValues(int dest[4], int** inputArr, int startLoc, int stopLoc){
 
-    int x1, x2, y1, y2 = 0;
 
+    int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
     for (int i = startLoc; i < stopLoc + 1; i++){
         x1 += inputArr[i][0];
         y1 += inputArr[i][1];
@@ -68,10 +67,11 @@ int* avrageVectorValues(int** inputArr, int startLoc, int stopLoc){
         y2 += inputArr[i][3];
     }
 
-    short int times = stopLoc - startLoc + 1;
+    int times = stopLoc - startLoc + 1;
+    dest[0] = x1 / times;
+    dest[1] = y1 / times;
+    dest[2] = x2 / times;
+    dest[3] = y2 / times;
 
-    int out[4] = {x1 / times, y1 / times, x2 / times , y2 / times};
-
-    return out;
     
 }

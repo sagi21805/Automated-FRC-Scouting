@@ -120,19 +120,30 @@ Args:
 `points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
 `size` how many pairs of points are in the array
 */
-int** stablePoints(int *points, int size){
+void stablePoints(int *points, int size, int **arrayOut){
 
 	int newShape[2] = {size, 4};
 
-	int** points2D = arr1Dto2D(points, newShape);
+	
+	int **points2D = arr1Dto2D(points, newShape);
+
+	// for (int i = 0; i < size * 4; i++){
+	// 	for (int j = 0; j < 4; j++){
+	// 		cout << points2D[i][j] << endl;
+	// 	}
+	// }
+	// int** points2D = arr1Dto2D(points, newShape);
 	short int reduced = 0;
 	short int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
 	short int index = 0;
-	int **out;
+	int out[size][4];
 
 	for (short int i = 0; i < size - 1; i++){
 
+
+
 		if (isClose(points2D[i], points2D[i+1], 125)){
+
 
 			similar[index] = i;
 			similar[index + 1] = i + 1;
@@ -158,26 +169,31 @@ int** stablePoints(int *points, int size){
 			}
 			index+=2;
 		}
-
 	}
 
-	short int constant = 0;
-	for (int i = 0, stop = newShape[0]; i < stop; i++){
-        out[i] = new int[newShape[1]];
-	}
-	//real + constant = the row in points2D	
+
+	int constant = 0;
+	// for (int i = 0, stop = newShape[0]; i < stop; i++){
+    //     out[i] = new int[newShape[1]];
+	// }
+
+	// real + constant = the row in points2D	
 	for (int real = 0; real < size - reduced; real++){
 		if (real == similar[real + constant]){
-			out[real] = avrageVectorValues(points2D, similar[real + constant], similar[real+constant+1]);
+			avrageVectorValues(out[real], points2D, similar[real + constant], similar[real+constant+1]);
 			constant += (similar[real+constant+1] - similar[real + constant]);
+			cout << "1";
 		}
 		else{
-			out[real] = points2D[real + constant]; 
+			for (int i = 0; i < 4; i++){
+				out[real][i] = points2D[real + constant][i];
+			}
+			cout << "2";
 		}
 		
 	}
 
-	return out;
+	memcpy(arrayOut, out, size * 4 * 4);
 
 
 }

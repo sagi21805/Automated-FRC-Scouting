@@ -29,9 +29,9 @@ extern "C"{
         
     }
     
-    int** _stablePoints(int* points, int size){
+    void _stablePoints(int *points, int size, int **arrayOut){
         
-        return stablePoints(points, size);
+        stablePoints(points, size, arrayOut);
 
     }
 

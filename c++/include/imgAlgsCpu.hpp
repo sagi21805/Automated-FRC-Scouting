@@ -17,5 +17,5 @@ Mat filterBlue(Mat frame);
 
 bool intersectingRect(int *rectA, int *rectB, int x);
 
-int** stablePoints(int *points, int size);
+void stablePoints(int *points, int size, int **arrayOut);
 
