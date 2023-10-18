@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include "field.hpp"
 #include "robot.hpp"
+#include "imgAlgsCpu.hpp"
 
 extern "C"{
 
@@ -27,6 +28,11 @@ extern "C"{
         return new Robot(teamNumber,team ,p1 ,p2);
         
     }
+    
+    int** _stablePoints(int* points, int size){
+        
+        return stablePoints(points, size);
 
+    }
 
 }

@@ -120,15 +120,15 @@ Args:
 `points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
 `size` how many pairs of points are in the array
 */
-Robot* stablePoints(int points[], unsigned int size){
+int** stablePoints(int *points, int size){
 
 	int newShape[2] = {size, 4};
 
 	int** points2D = arr1Dto2D(points, newShape);
-
+	short int reduced = 0;
 	short int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
 	short int index = 0;
-	int out[size][4];
+	int **out;
 
 	for (short int i = 0; i < size - 1; i++){
 
@@ -143,9 +143,14 @@ Robot* stablePoints(int points[], unsigned int size){
 					
 					similar[index + 1] = k + 1;
 
+					if (k == size - i - 1){ //last time
+						reduced += k-i;
+					}
+
 				}
 				else{
 					i += k - i - 1;
+					reduced += k - i;
 					break;
 				}
 
@@ -156,9 +161,23 @@ Robot* stablePoints(int points[], unsigned int size){
 
 	}
 
-	for (int i = 0; i < index; i+=2){
-		avrageVectorValues(points2D, i, i+1);
+	short int constant = 0;
+	for (int i = 0, stop = newShape[0]; i < stop; i++){
+        out[i] = new int[newShape[1]];
 	}
+	//real + constant = the row in points2D	
+	for (int real = 0; real < size - reduced; real++){
+		if (real == similar[real + constant]){
+			out[real] = avrageVectorValues(points2D, similar[real + constant], similar[real+constant+1]);
+			constant += (similar[real+constant+1] - similar[real + constant]);
+		}
+		else{
+			out[real] = points2D[real + constant]; 
+		}
+		
+	}
+
+	return out;
 
 
 }

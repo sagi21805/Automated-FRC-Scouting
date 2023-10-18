@@ -68,7 +68,9 @@ int* avrageVectorValues(int** inputArr, int startLoc, int stopLoc){
         y2 += inputArr[i][3];
     }
 
-    int out[4] = {x1, y1, x2, y2};
+    short int times = stopLoc - startLoc + 1;
+
+    int out[4] = {x1 / times, y1 / times, x2 / times , y2 / times};
 
     return out;
     
