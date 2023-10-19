@@ -9,8 +9,8 @@ cap = cv2.VideoCapture('/home/sagi/Downloads/d2.mp4')
 
 # model = YOLO('/home/sagi/Downloads/bumpers.pt')
 print("loading YOLO")
-modelBumpers = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train/weights/best.pt')
-# modelGamePiece = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train3/weights/best.pt')
+modelGamePiece = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train/weights/best.pt')
+modelBumpers = YOLO('/home/sagi/Downloads/best.pt')
 
 t = time.time()
 
@@ -29,30 +29,30 @@ while cap.isOpened():
         frame = frame[230:487]
         
     
-        results = modelBumpers(frame)
+        results = modelGamePiece(frame)
+        resultsB = modelBumpers(frame)
         for r in results:
-            boxes = r.boxes.cpu().numpy()
-            b = boxes.xyxy.astype(int)
-            s = b[b[:, 0].argsort()]
+            boxes = r.boxes.data.cpu().numpy()
+            xyxyClass = np.delete(boxes, 4, 1)
+            s = xyxyClass[xyxyClass[:, 0].argsort()]
             s = np.array(s, dtype=np.int32).flatten()
-                        
+            out = np.empty((len(s) // 5, 5), dtype=np.int32)
+            stablePoints(s, ctypes.c_int32(len(s) // 5), out)
             
-            out = stablePoints(s, ctypes.c_int32(len(s) // 4))
-                        
+            print(out)
+            
             for r in out:
                 frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 1)
                 # frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 1)
         
         
-        # for r in resultsG:
-        #     boxes = r.boxes.cpu().numpy()
-        #     for box in boxes:
-        #         r = box.xyxy[0].astype(int)
-        #         if box.cls[0] == 0:
-        #             frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 5)
-        #         if box.cls[0] == 1:
-        #             frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 5)
-            frame = cv2.resize(frame, (1280, 640))
+        for r in resultsB:
+            boxes = r.boxes.cpu().numpy()
+            for box in boxes:
+                r = box.xyxy[0].astype(int)
+                frame = cv2.rectangle(frame, r[:2], r[2:5], (255, 0 ,0), 1)
+                
+            frame = cv2.resize(frame, (640*2, 257*2))
             cv2.imshow("f", frame)
             cv2.waitKey(1)
             # skip(cap, 1)

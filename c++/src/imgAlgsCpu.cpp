@@ -120,18 +120,19 @@ Args:
 `points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
 `size` how many pairs of points are in the array
 */
-int** stablePoints(int *points, int size){
+void stablePoints(int *points, int size, int **outArr){
 
-	int newShape[2] = {size, 4};
+	int newShape[2] = {size, 5};
 
 	
 	int **points2D = arr1Dto2D(points, newShape);
 
-	// for (int i = 0; i < size; i++){
-	// 	for (int j = 0; j < 4; j++){
-	// 		cout << points2D[i][j] << endl;
-	// 	}
-	// }
+	for (int i = 0; i < size; i++){
+		for (int j = 0; j < 5; j++){
+			cout << points2D[i][j] << " ";
+		}
+		cout << endl; 
+	}
 	// int** points2D = arr1Dto2D(points, newShape);
 	int reduced = 0;
 	int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
@@ -174,7 +175,7 @@ int** stablePoints(int *points, int size){
 		}
 	}
 
-	int **out;
+	int out[size-reduced][5];
 
 
 	int constant = 0;
@@ -182,34 +183,24 @@ int** stablePoints(int *points, int size){
     //     out[i] = new int[newShape[1]];
 	// }
 	// real + constant = the row in points2D
-	cout << "index:  " << index << endl;	
 	for (int i = 0; i < size; i++){
 		cout <<  similar[i] << " "; 
 	}	
-	cout << endl;
 
 	for (int real = 0; real < size - reduced; real++){
 		if (real == similar[real] + constant){
-			cout << "entered" << endl;
 			avrageVectorValues(out[real], points2D, similar[real] + constant, similar[real+1] + constant);
-			cout << "constant: " << constant << endl;
 			constant += (similar[real+1] - similar[real]);
-			cout << "constant2: " << constant << endl;
 		}
 		else{
-			cout << "constant: " << constant << endl;
-			cout << "reducded: " << reduced << endl;
-			cout << "real: " << real << endl;
-			for (int i = 0; i < 4; i++){
+			for (int i = 0; i < 4 ; i++){
 				out[real][i] = points2D[real + constant][i];
 			}
 		}
 		
 	}
 	
-
-	return out;
-
+	memcpy(outArr, out, (size - reduced) * 4 * 4);
 
 }
 	
