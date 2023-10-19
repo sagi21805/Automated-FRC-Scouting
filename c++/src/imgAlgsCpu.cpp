@@ -120,37 +120,38 @@ Args:
 `points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
 `size` how many pairs of points are in the array
 */
-void stablePoints(int *points, int size, int **arrayOut){
+int** stablePoints(int *points, int size){
 
 	int newShape[2] = {size, 4};
 
 	
 	int **points2D = arr1Dto2D(points, newShape);
 
-	// for (int i = 0; i < size * 4; i++){
+	// for (int i = 0; i < size; i++){
 	// 	for (int j = 0; j < 4; j++){
 	// 		cout << points2D[i][j] << endl;
 	// 	}
 	// }
 	// int** points2D = arr1Dto2D(points, newShape);
-	short int reduced = 0;
-	short int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
-	short int index = 0;
-	int out[size][4];
+	int reduced = 0;
+	int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
+	for (int i = 0; i < size; i++){
+		similar[i] = size + 1;
+	}
+	int index = 0;
+	const int thresh = 150;
 
-	for (short int i = 0; i < size - 1; i++){
+	for (int i = 0; i < size - 1; i++){
 
-
-
-		if (isClose(points2D[i], points2D[i+1], 125)){
+		if (isClose(points2D[i], points2D[i+1], thresh)){
 
 
 			similar[index] = i;
 			similar[index + 1] = i + 1;
 
-			for (short int k = i + 1; k < size - i -1 ; k++){
+			for (int k = i + 1; k < size - i -1 ; k++){
 
-				if (isClose(points2D[k], points2D[k+1], 125) && isClose(points2D[i], points2D[k+1], (125-50) * (k-i+1.5))){
+				if (isClose(points2D[k], points2D[k+1], thresh) && isClose(points2D[i], points2D[k+1], (thresh-50) * (k-i+1.5))){
 					
 					similar[index + 1] = k + 1;
 
@@ -160,40 +161,54 @@ void stablePoints(int *points, int size, int **arrayOut){
 
 				}
 				else{
-					i += k - i - 1;
 					reduced += k - i;
+					i += k - i - 1;
 					break;
 				}
 
 
 			}
+			
 			index+=2;
+
 		}
 	}
+
+	int **out;
 
 
 	int constant = 0;
 	// for (int i = 0, stop = newShape[0]; i < stop; i++){
     //     out[i] = new int[newShape[1]];
 	// }
+	// real + constant = the row in points2D
+	cout << "index:  " << index << endl;	
+	for (int i = 0; i < size; i++){
+		cout <<  similar[i] << " "; 
+	}	
+	cout << endl;
 
-	// real + constant = the row in points2D	
 	for (int real = 0; real < size - reduced; real++){
-		if (real == similar[real + constant]){
-			avrageVectorValues(out[real], points2D, similar[real + constant], similar[real+constant+1]);
-			constant += (similar[real+constant+1] - similar[real + constant]);
-			cout << "1";
+		if (real == similar[real] + constant){
+			cout << "entered" << endl;
+			avrageVectorValues(out[real], points2D, similar[real] + constant, similar[real+1] + constant);
+			cout << "constant: " << constant << endl;
+			constant += (similar[real+1] - similar[real]);
+			cout << "constant2: " << constant << endl;
 		}
 		else{
+			cout << "constant: " << constant << endl;
+			cout << "reducded: " << reduced << endl;
+			cout << "real: " << real << endl;
 			for (int i = 0; i < 4; i++){
 				out[real][i] = points2D[real + constant][i];
 			}
-			cout << "2";
 		}
 		
 	}
+	
 
-	memcpy(arrayOut, out, size * 4 * 4);
+	return out;
 
 
 }

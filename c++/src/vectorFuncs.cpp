@@ -51,7 +51,7 @@ int** arr1Dto2D(int *input, int *newShape){
     return out;
 }
 
-bool isClose(int* pointA, int* pointB, int thresh){
+bool isClose(int* pointA, int* pointB, double thresh){
 	return (pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2) <  thresh);
 
 }
