@@ -35,22 +35,23 @@ while cap.isOpened():
             boxes = r.boxes.data.cpu().numpy()
             xyxyClass = np.delete(boxes, 4, 1)
             s = xyxyClass[xyxyClass[:, 0].argsort()]
-            s = np.array(s, dtype=np.int32).flatten()
-            out = np.empty((len(s) // 5, 5), dtype=np.int32)
-            stablePoints(s, ctypes.c_int32(len(s) // 5), out)
+            s = np.array(s, dtype=np.int32)
+            # out = np.empty((len(s) // 5, 5), dtype=np.int32)
+            # stablePoints(s, ctypes.c_int32(len(s) // 5), out)
             
-            print(out)
+            # print(out)
             
-            for r in out:
-                frame = cv2.rectangle(frame, r[:2], r[2:], (0, 255 ,255), 1)
+            for r in s:
+                print(r[:2], r[2:4])
+                frame = cv2.rectangle(frame, r[:2], r[2:4], (0, 255 ,255), 1)
                 # frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 1)
         
         
-        for r in resultsB:
-            boxes = r.boxes.cpu().numpy()
-            for box in boxes:
-                r = box.xyxy[0].astype(int)
-                frame = cv2.rectangle(frame, r[:2], r[2:5], (255, 0 ,0), 1)
+        # for r in resultsB:
+        #     boxes = r.boxes.cpu().numpy()
+        #     for box in boxes:
+        #         r = box.xyxy[0].astype(int)
+        #         frame = cv2.rectangle(frame, r[:2], r[2:5], (255, 0 ,0), 1)
                 
             frame = cv2.resize(frame, (640*2, 257*2))
             cv2.imshow("f", frame)
