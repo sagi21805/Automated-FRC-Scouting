@@ -120,9 +120,9 @@ Args:
 `points` array of points sorted by x1 [[x1, y1, x2, y2], [x1, y1 ...] ...]
 `size` how many pairs of points are in the array
 */
-void stablePoints(int *points, int size, int **outArr){
+void stablePoints(int *points, int size, int **pointsOut){
 
-	int newShape[2] = {size, 5};
+	int newShape[2] = {size, 4};
 
 	
 	int **points2D = arr1Dto2D(points, newShape);
@@ -200,7 +200,7 @@ void stablePoints(int *points, int size, int **outArr){
 		
 	}
 	
-	memcpy(outArr, out, (size - reduced) * 4 * 4);
+	memcpy(pointsOut, out, (size - reduced) * 4 * 4);
 
 }
 	
