@@ -10,15 +10,15 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR})
 
 include_directories(
-        ${PROJECT_SOURCE_DIR}/c++/include
-        ${PROJECT_SOURCE_DIR}/c++/src
+        ${PROJECT_SOURCE_DIR}/core/c++/include
+        ${PROJECT_SOURCE_DIR}/core/c++/src
 )
 
 file(GLOB all_SRCS
-        "${PROJECT_SOURCE_DIR}/c++/include/*.h"
-        "${PROJECT_SOURCE_DIR}/c++/include/*.hpp"
-        "${PROJECT_SOURCE_DIR}/c++/src/*.cpp"
-        "${PROJECT_SOURCE_DIR}/c++/src*.c"
+        "${PROJECT_SOURCE_DIR}/core/c++/include/*.h"
+        "${PROJECT_SOURCE_DIR}/core/c++/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/core/c++/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/core/c++/src/*.c"
         )
 
 
