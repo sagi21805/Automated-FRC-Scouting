@@ -5,7 +5,7 @@
 
 int main(){
 
-    std::cout << ::getBuildInformation() << std::endl;
+    std::cout << cv::getBuildInformation() << std::endl;
 
     Field f("/home/sagi21805/Downloads/dcmp.mp4");
     f.run();

@@ -3,7 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include "robot.hpp"
 
-using namespace cv;
+using cv::Mat, cv::Size;
 
 class Field{
 

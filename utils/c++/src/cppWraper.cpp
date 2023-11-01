@@ -1,7 +1,7 @@
-#include <opencv2/opencv.hpp>
 #include "field.hpp"
 #include "robot.hpp"
 #include "imgAlgsCpu.hpp"
+#include "tracker.hpp"
 
 extern "C"{
 
@@ -28,10 +28,16 @@ extern "C"{
         return new Robot(teamNumber,team ,p1 ,p2);
         
     }
+
+    Tracker* newTracker(){
+
+        return new Tracker();
+
+    }
     
-    void _stablePoints(int *points, int size, int **outArr){
-        
-        stablePoints(points, size, outArr);
+    void _stablePoints(Tracker* t, int *points, int size, int **outArr){
+
+        t -> stablePoints(points, size, outArr);
 
     }
 
