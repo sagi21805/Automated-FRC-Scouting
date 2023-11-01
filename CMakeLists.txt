@@ -9,6 +9,13 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR})
 
+include_directories(
+        ${PROJECT_SOURCE_DIR}/core/c++/include
+        ${PROJECT_SOURCE_DIR}/core/c++/src
+        ${PROJECT_SOURCE_DIR}/utils/c++/include
+        ${PROJECT_SOURCE_DIR}/utils/c++/src
+)
+
 file(GLOB all_SRCS
         "${PROJECT_SOURCE_DIR}/core/c++/include/*.h"
         "${PROJECT_SOURCE_DIR}/core/c++/include/*.hpp"
