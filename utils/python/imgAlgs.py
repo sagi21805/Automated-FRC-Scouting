@@ -1,7 +1,7 @@
 import ctypes 
 import numpy as np
 
-lib = ctypes.CDLL('./build/libmain.so')
+lib = ctypes.CDLL('build/libmain.so')
 
 ROBOT_OBJECT = ctypes.POINTER(ctypes.c_char)
 c2D_int_array = np.ctypeslib.ndpointer(dtype=np.int32, ndim=2, flags='C_CONTIGUOUS')

@@ -29,7 +29,7 @@ extern "C"{
         
     }
     
-    void _stablePoints(int *points, int size, int** outArr){
+    void _stablePoints(int *points, int size, int **outArr){
         
         stablePoints(points, size, outArr);
 
