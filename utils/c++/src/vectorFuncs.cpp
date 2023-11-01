@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <cmath>
 
-using namespace std;
+using std::vector;
 
 vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape){
 
@@ -34,7 +34,7 @@ vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape){
 
 int** arr1Dto2D(int *input, int *newShape){
     
-    int** out = new int*[newShape[0]];
+    int **out = new int*[newShape[0]];
     // for (int i = 0, stop = newShape[0]; i < stop; i++){
     //     out[i].resize(newShape[1]);
     // }
@@ -51,8 +51,8 @@ int** arr1Dto2D(int *input, int *newShape){
     return out;
 }
 
-bool isClose(int* pointA, int* pointB, double thresh){
-	return (pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2) <  thresh);
+bool isClose(int *pointA, int *pointB, double distance){
+	return (pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2) <  distance);
 
 }
 

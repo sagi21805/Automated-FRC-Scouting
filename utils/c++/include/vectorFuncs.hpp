@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 
-using namespace std;
+using std::vector;
 
 //TODO imporve to Nd arrays.
 template <typename S>
@@ -21,11 +21,11 @@ std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector){
     return os;
 }
 
-vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape);
+std::vector<vector<int>> vector1Dto2D(std::vector<int> input, std::vector<size_t> newShape);
 
-bool isClose(int* pointA, int* pointB, double thresh);
+bool isClose(int *pointA, int *pointB, double distance);
 
-void avrageVectorValues(int dest[4], int** vector, int locA, int locB);
+void avrageVectorValues(int dest[4], int **vector, int locA, int locB);
 
 int** arr1Dto2D(int *input, int *newShape);
 
