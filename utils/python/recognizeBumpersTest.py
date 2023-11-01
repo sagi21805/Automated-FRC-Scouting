@@ -5,12 +5,12 @@ import numpy as np
 import ctypes
 import time
 print("loading video")
-cap = cv2.VideoCapture('/home/sagi/Downloads/d2.mp4')
+cap = cv2.VideoCapture('/home/sagi21805/Downloads/dcmp.mp4')
 
 # model = YOLO('/home/sagi/Downloads/bumpers.pt')
 print("loading YOLO")
-modelGamePiece = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train/weights/best.pt')
-modelBumpers = YOLO('/home/sagi/Downloads/best.pt')
+# modelGamePiece = YOLO('/home/sagi/Desktop/vscode/Automated-FRC-Scouting/runs/detect/train/weights/best.pt')
+modelBumpers = YOLO('data/BumperWieghts.pt')
 
 t = time.time()
 
@@ -26,24 +26,25 @@ while cap.isOpened():
     if success:
         # Run YOLOv8 inference on the frame\
         frame = cv2.resize(frame, (640, 640))
-        frame = frame[230:487]
+        frame = frame[150:400]
         
     
-        results = modelGamePiece(frame)
+        # results = modelGamePiece(frame)
         resultsB = modelBumpers(frame)
-        for r in results:
+        for r in resultsB:
             boxes = r.boxes.data.cpu().numpy()
-            xyxyClass = np.delete(boxes, 4, 1)
+            xyxyClass = np.delete(boxes, [4, 5], 1)
+            print(xyxyClass)
             s = xyxyClass[xyxyClass[:, 0].argsort()]
-            s = np.array(s, dtype=np.int32)
-            # out = np.empty((len(s) // 5, 5), dtype=np.int32)
-            # stablePoints(s, ctypes.c_int32(len(s) // 5), out)
+            s = np.array(s, dtype=np.int32).flatten()
+            out = np.empty((len(s) // 4, 4), dtype=np.int32)
+            stablePoints(s, ctypes.c_int32(len(s) // 4), out)
             
-            # print(out)
+            print(out)
             
             for r in s:
                 print(r[:2], r[2:4])
-                frame = cv2.rectangle(frame, r[:2], r[2:4], (0, 255 ,255), 1)
+                frame = cv2.rectangle(frame, xyxyClass[:2], xyxyClass[2:4], (0, 255 ,255), 1)
                 # frame = cv2.rectangle(frame, r[:2], r[2:], (255, 0 ,255), 1)
         
         
