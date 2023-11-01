@@ -1,10 +1,16 @@
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
-#include "imgAlgsCpu.hpp"
-#include <cmath>
 #include "vectorFuncs.hpp"
+#include "mathUtils.hpp"
+#include "tracker.hpp"
 
-void stablePoints(int *points, int size, int **pointsOut){
+using std::cout, std::endl;
+
+Tracker::Tracker(){
+    cout << "Created Tracker";
+}
+
+void Tracker::stablePoints(int *points, int size, int **pointsOut){
 
 	int newShape[2] = {size, 4};
 
@@ -85,6 +91,12 @@ void stablePoints(int *points, int size, int **pointsOut){
 	}
 	
 	memcpy(pointsOut, out, (size - reduced) * 4 * 4);
+
+}
+
+void Tracker::track(int ***currentPoints, int***prevPoints, short int sizeCurrent, short int sizePrev){
+
+    cout << "Track" << endl;
 
 }
 	
