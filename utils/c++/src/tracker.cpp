@@ -3,11 +3,24 @@
 #include "vectorFuncs.hpp"
 #include "mathUtils.hpp"
 #include "tracker.hpp"
+#include "boundingBox.hpp"
 
 using std::cout, std::endl;
 
-Tracker::Tracker(){
-    cout << "Created Tracker";
+Tracker::Tracker(BoundingBox *b){
+    this->currentTrack = b;
+}
+
+BoundingBox* Tracker::pointsToBoundingBoxes(int **pointsWithClass, int size){
+	
+	BoundingBox boundingBoxes[size];
+	
+	for (int i = 0; i < size; i++){
+		boundingBoxes[i] = BoundingBox(pointsWithClass[i], i);	
+	}
+
+	return boundingBoxes;
+
 }
 
 void Tracker::stablePoints(int *points, int size, int **pointsOut){
@@ -18,6 +31,14 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 
 	
 	int **points2D = arr1Dto2D(points, newShape);
+
+	BoundingBox boundingBoxes[size];
+
+	for (int i = 0; i < size; i++){
+		boundingBoxes[i] = BoundingBox(points2D[i], i);	
+	}
+
+
 
 	// for (int i = 0; i < size; i++){
 	// 	for (int j = 0; j < 5; j++){

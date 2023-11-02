@@ -1,14 +1,17 @@
 #ifndef __TRACKER__HPP
 #define __TRACKER_HPP
 
+#include "boundingBox.hpp"
+
 class Tracker{
     
     private:
-        int ***prevPoints;
-        int ***currentPoints;
+        BoundingBox *currentTrack;
     
     public:
-        Tracker();
+        Tracker(BoundingBox *boundingBoxes);
+
+        BoundingBox* pointsToBoundingBoxes(int **pointsWithClass, int size);
 
         void stablePoints(int *points, int size, int **pointsOut);
 
