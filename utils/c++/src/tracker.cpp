@@ -12,24 +12,26 @@ Tracker::Tracker(){
 
 void Tracker::stablePoints(int *points, int size, int **pointsOut){
 
-	int newShape[2] = {size, 4};
+	short int pointsSize = 5; //points: [x, y, width, hieght, class]
+
+	int newShape[2] = {size, pointsSize};
 
 	
 	int **points2D = arr1Dto2D(points, newShape);
 
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < 5; j++){
-			cout << points2D[i][j] << " ";
-		}
-		cout << endl; 
-	}
-	// int** points2D = arr1Dto2D(points, newShape);
-	int reduced = 0;
+	// for (int i = 0; i < size; i++){
+	// 	for (int j = 0; j < 5; j++){
+	// 		cout << points2D[i][j] << " ";
+	// 	}
+	// 	cout << endl; 
+	// }
+
+	unsigned short int reduced = 0;
 	int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
 	for (int i = 0; i < size; i++){
 		similar[i] = size + 1;
 	}
-	int index = 0;
+	short int index = 0;
 	const int thresh = 150;
 
 	for (int i = 0; i < size - 1; i++){
@@ -65,14 +67,11 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 		}
 	}
 
-	int out[size-reduced][5];
+	int out[size-reduced][pointsSize];
 
 
-	int constant = 0;
-	// for (int i = 0, stop = newShape[0]; i < stop; i++){
-    //     out[i] = new int[newShape[1]];
-	// }
-	// real + constant = the row in points2D
+	short int constant = 0;
+	
 	for (int i = 0; i < size; i++){
 		cout <<  similar[i] << " "; 
 	}	
@@ -81,16 +80,17 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 		if (real == similar[real] + constant){
 			avrageVectorValues(out[real], points2D, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
+			out[real][4] = points2D[similar[real] + constant][4]
 		}
 		else{
-			for (int i = 0; i < 4 ; i++){
+			for (int i = 0; i < pointsSize ; i++){
 				out[real][i] = points2D[real + constant][i];
 			}
 		}
 		
 	}
 	
-	memcpy(pointsOut, out, (size - reduced) * 4 * 4);
+	memcpy(pointsOut, out, (size - reduced) * pointsSize * sizeof(int));
 
 }
 

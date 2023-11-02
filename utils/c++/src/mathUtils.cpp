@@ -53,14 +53,3 @@ bool intersectingRect(int *rectA, int *rectB, int x = 0){
 double squareDistance(int *pointA, int *pointB){
     return pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2);
 }
-
-bool isClose(int *pointA, int *pointB, double distance){
-	return squareDistance(pointA, pointB) <  distance;
-}
-
-int* center(int** boundingBox){
-    
-    int center[2] = {(boundingBox[0][0] + boundingBox[1][0]) / 2, (boundingBox[0][1] + boundingBox[1][1]) / 2};
-    
-    return center;
-}

@@ -51,22 +51,21 @@ int** arr1Dto2D(int *input, int *newShape){
     return out;
 }
 
-void avrageVectorValues(int dest[4], int** inputArr, int startLoc, int stopLoc){
+void avrageVectorValues(int *dest, int** inputArr, int startLoc, int stopLoc){
 
 
-    int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    int x = 0, y = 0, w = 0, h = 0;
     for (int i = startLoc; i < stopLoc + 1; i++){
-        x1 += inputArr[i][0];
-        y1 += inputArr[i][1];
-        x2 += inputArr[i][2];
-        y2 += inputArr[i][3];
+        x += inputArr[i][0];
+        y += inputArr[i][1];
+        w += inputArr[i][2];
+        h += inputArr[i][3];
     }
 
     int times = stopLoc - startLoc + 1;
-    dest[0] = x1 / times;
-    dest[1] = y1 / times;
-    dest[2] = x2 / times;
-    dest[3] = y2 / times;
-
+        dest[0] = x / times;
+        dest[1] = y / times;
+        dest[2] = w / times;
+        dest[3] = h / times;
     
 }

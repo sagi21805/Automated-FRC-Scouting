@@ -12,10 +12,5 @@ double min(Mat frame);
 
 double squareDistance(int *pointA, int *pointB);
 
-bool intersectingRect(int *rectA, int *rectB, int x = 0);
-
-bool isClose(int *pointA, int *pointB, double distance);
-
-double center(int** boundingBox);
 
 #endif
