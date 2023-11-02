@@ -2,6 +2,8 @@
 #define __BOUNDING_BOX_HPP
 
 #include "mathUtils.hpp"
+#include <opencv4/opencv2/opencv.hpp>
+
 
 class BoundingBox{
 
@@ -15,9 +17,11 @@ class BoundingBox{
         int* center;
 
     public:
-        BoundingBox(int *boxWithClass);
 
-        void setBox(int* boxWithClass);
+        BoundingBox();
+        BoundingBox(int *pointsWithClasses, int id);
+
+        void setBox(int* pointsWithClasses);
 
         int* getBox();
 
@@ -27,13 +31,11 @@ class BoundingBox{
 
         int squareDistanceTo(BoundingBox b);
 
-        bool isIntersectingTo(BoundingBox b, int x = 0);
+        bool isIntersectingTo(BoundingBox b, int difference = 0);
 
         bool isCloseTo(BoundingBox b, double distance);
 
         int* findCenter();
-
-
 
 
 };
