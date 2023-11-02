@@ -43,11 +43,10 @@ Args:
 return:
 true if the rectangles are intersecting, false otherwise
 */
-bool intersectingRect(int *rectA, int *rectB, int x = 0){
+bool intersectingRect(int *rectA, int *rectB, int difference = 0){
 
-	if (rectA[0] < rectB[2] + x && rectA[2] > rectB[0] - x && rectA[1] < rectB[3] + x && rectA[3] > rectB[1] - x) { return true; }
+	return rectA[0] < rectB[2] + difference && rectA[2] > rectB[0] - difference && rectA[1] < rectB[3] + difference && rectA[3] > rectB[1] - difference;
 	
-	return false;
 }
 
 double squareDistance(int *pointA, int *pointB){
