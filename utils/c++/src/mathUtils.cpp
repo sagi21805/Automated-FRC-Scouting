@@ -43,7 +43,7 @@ Args:
 return:
 true if the rectangles are intersecting, false otherwise
 */
-bool intersectingRect(int *rectA, int *rectB, int difference = 0){
+ounbool intersectingRect(int *rectA, int *rectB, int difference = 0){
 
 	return rectA[0] < rectB[2] + difference && rectA[2] > rectB[0] - difference && rectA[1] < rectB[3] + difference && rectA[3] > rectB[1] - difference;
 	
