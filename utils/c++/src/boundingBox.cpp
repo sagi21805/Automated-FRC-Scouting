@@ -65,7 +65,7 @@ bool BoundingBox::isIntersectingTo(BoundingBox b, int difference = 0){
 }
 
 //TODO fix this to work with BoundingBoxes
-void avrageBoundingBoxes(BoundingBox* dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc){
+void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc){
 
 
     int x = 0, y = 0, w = 0, h = 0;
@@ -78,10 +78,8 @@ void avrageBoundingBoxes(BoundingBox* dest, BoundingBox* boundingBoxes, int star
 
     short times = stopLoc - startLoc + 1;
 
-    
-    // dest[0] = x / times;
-    // dest[1] = y / times;
-    // dest[2] = w / times;
-    // dest[3] = h / times;
+    int out[4] = {x/times, y/times, w/times, h/times};
+
+    dest.setBox(out);
 
 }

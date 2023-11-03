@@ -43,6 +43,6 @@ class BoundingBox{
 
 };
 
-void avrageBoundingBoxes(BoundingBox* dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc);
+void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc);
 
 #endif 

@@ -8,7 +8,15 @@
 using std::cout, std::endl;
 
 Tracker::Tracker(int *pointsWithClass, int size){
-    this->currentStableTrack = stablePoints(pointsWithClass, size);
+    this->setTrackPoints(pointsWithClass, size);
+}
+
+void Tracker::setTrackPoints(int *pointsWithClass, int size){
+	this->currentStableTrack = stablePoints(pointsWithClass, size);
+}
+
+BoundingBox* Tracker::getTrackPoints(){
+	return this->currentStableTrack;	
 }
 
 BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
@@ -79,7 +87,7 @@ BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 		}
 	}
 
-	BoundingBox out[size-reduced][pointsSize];
+	BoundingBox out[size-reduced];
 
 
 	short int constant = 0;
@@ -92,12 +100,9 @@ BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 		if (real == similar[real] + constant){
 			avrageBoundingBoxes(out[real], boundingBoxes, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
-			out[real][4] = points2D[similar[real] + constant][4]
 		}
 		else{
-			for (int i = 0; i < pointsSize ; i++){
-				out[real][i] = points2D[real + constant][i];
-			}
+			out[real].setBox(boundingBoxes[real + constant].getBox());
 		}
 		
 	}
@@ -105,9 +110,4 @@ BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 
 }
 
-void Tracker::track(int ***currentPoints, int***prevPoints, short int sizeCurrent, short int sizePrev){
-
-    cout << "Track" << endl;
-
-}
 	
