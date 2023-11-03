@@ -7,45 +7,37 @@
 
 using std::cout, std::endl;
 
-Tracker::Tracker(BoundingBox *b){
-    this->currentTrack = b;
+Tracker::Tracker(int *pointsWithClass, int size){
+    this->currentStableTrack = stablePoints(pointsWithClass, size);
 }
 
-BoundingBox* Tracker::pointsToBoundingBoxes(int **pointsWithClass, int size){
+BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
 	
 	BoundingBox boundingBoxes[size];
-	
-	for (int i = 0; i < size; i++){
-		boundingBoxes[i] = BoundingBox(pointsWithClass[i], i);	
+
+	int pointWithClass[5];
+	int constant = 0;
+
+	for (int i = 1; i < size + 1; i++){
+
+		for (int j = 0; i < 5; i++){
+			pointWithClass[j] = pointsWithClass[j + constant];
+		}
+
+		constant += 5;
+
+		boundingBoxes[i] = BoundingBox(pointWithClass, i);	
 	}
 
 	return boundingBoxes;
 
 }
 
-void Tracker::stablePoints(int *points, int size, int **pointsOut){
+BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 
 	short int pointsSize = 5; //points: [x, y, width, hieght, class]
 
-	int newShape[2] = {size, pointsSize};
-
-	
-	int **points2D = arr1Dto2D(points, newShape);
-
-	BoundingBox boundingBoxes[size];
-
-	for (int i = 0; i < size; i++){
-		boundingBoxes[i] = BoundingBox(points2D[i], i);	
-	}
-
-
-
-	// for (int i = 0; i < size; i++){
-	// 	for (int j = 0; j < 5; j++){
-	// 		cout << points2D[i][j] << " ";
-	// 	}
-	// 	cout << endl; 
-	// }
+	BoundingBox *boundingBoxes = pointsToBoundingBoxes(pointsWithClass, size);
 
 	unsigned short int reduced = 0;
 	int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
@@ -53,19 +45,18 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 		similar[i] = size + 1;
 	}
 	short int index = 0;
-	const int thresh = 150;
+	const int distance = 150;
 
 	for (int i = 0; i < size - 1; i++){
 
-		if (isClose(points2D[i], points2D[i+1], thresh)){
-
+		if (boundingBoxes[i].isCloseTo(boundingBoxes[i+1], distance) && boundingBoxes[i].getType() == boundingBoxes[i+1].getType()){
 
 			similar[index] = i;
 			similar[index + 1] = i + 1;
 
 			for (int k = i + 1; k < size - i -1 ; k++){
 
-				if (isClose(points2D[k], points2D[k+1], thresh) && isClose(points2D[i], points2D[k+1], (thresh-50) * (k-i+1.5))){
+				if (boundingBoxes[k].isCloseTo(boundingBoxes[k+1], distance) && boundingBoxes[k].getType() == boundingBoxes[k+1].getType() && boundingBoxes[i].isCloseTo(boundingBoxes[i+1], (distance-50) * (k-i+1.5)) && boundingBoxes[i].getType() == boundingBoxes[i+1].getType()){
 					
 					similar[index + 1] = k + 1;
 
@@ -88,7 +79,7 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 		}
 	}
 
-	int out[size-reduced][pointsSize];
+	BoundingBox out[size-reduced][pointsSize];
 
 
 	short int constant = 0;
@@ -99,7 +90,7 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 
 	for (int real = 0; real < size - reduced; real++){
 		if (real == similar[real] + constant){
-			avrageVectorValues(out[real], points2D, similar[real] + constant, similar[real+1] + constant);
+			avrageBoundingBoxes(out[real], boundingBoxes, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
 			out[real][4] = points2D[similar[real] + constant][4]
 		}
@@ -111,7 +102,6 @@ void Tracker::stablePoints(int *points, int size, int **pointsOut){
 		
 	}
 	
-	memcpy(pointsOut, out, (size - reduced) * pointsSize * sizeof(int));
 
 }
 

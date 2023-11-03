@@ -33,21 +33,6 @@ double min(Mat frame){
 	return lowest;
 }
 
-/*
-checks if two rectangles are intersecting.
-Args:
-`rectA` array of rectA points [X1, Y1, X2, Y2]
-`rectB` array of rectB points [X1, Y1, X2, Y2]
-****notice (x1, y1) stands for the top left corner, and (x2, y2) stands for the bottom right corner***
-`x` increases the size of rect B in size x in all directions, Defualts to 0
-return:
-true if the rectangles are intersecting, false otherwise
-*/
-ounbool intersectingRect(int *rectA, int *rectB, int difference = 0){
-
-	return rectA[0] < rectB[2] + difference && rectA[2] > rectB[0] - difference && rectA[1] < rectB[3] + difference && rectA[3] > rectB[1] - difference;
-	
-}
 
 double squareDistance(int *pointA, int *pointB){
     return pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2);

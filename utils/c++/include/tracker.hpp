@@ -6,14 +6,14 @@
 class Tracker{
     
     private:
-        BoundingBox *currentTrack;
+        BoundingBox *currentStableTrack;
     
     public:
-        Tracker(BoundingBox *boundingBoxes);
+        Tracker(int *pointsWithClass, int size);
 
-        BoundingBox* pointsToBoundingBoxes(int **pointsWithClass, int size);
+        BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size);
 
-        void stablePoints(int *points, int size, int **pointsOut);
+        BoundingBox* stablePoints(int *points, int size);
 
         void track(int ***currentPoints, int ***prevPoints, short int sizeCurrent, short int sizePrev);
 
