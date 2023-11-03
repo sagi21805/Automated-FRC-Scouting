@@ -19,15 +19,17 @@ class BoundingBox{
     public:
 
         BoundingBox();
-        BoundingBox(int *pointsWithClasses, int id);
+        BoundingBox(int *pointWithClasses, int id);
 
-        void setBox(int* pointsWithClasses);
+        void setBox(int *pointWithClasses);
 
         int* getBox();
 
         char getClass();
 
         int* getCenter();
+
+        char getType();
 
         int squareDistanceTo(BoundingBox b);
 
@@ -38,6 +40,9 @@ class BoundingBox{
         int* findCenter();
 
 
+
 };
+
+void avrageBoundingBoxes(BoundingBox* dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc);
 
 #endif 
