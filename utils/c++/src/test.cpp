@@ -1,11 +1,9 @@
-#include "tracker.hpp"
+
 
 int main(){
 
-    int points[5] = {1, 3, 5, 6, 0};
+    int *t = new int[3];
 
-    Tracker *t = new Tracker(points, 5);
-
-    delete t;
+    delete[] t;
 
 }

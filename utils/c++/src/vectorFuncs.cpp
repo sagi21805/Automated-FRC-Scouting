@@ -32,22 +32,4 @@ vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape){
     return out;
 }
 
-int** arr1Dto2D(int *input, int *newShape){
-    
-    int **out = new int*[newShape[0]];
-    // for (int i = 0, stop = newShape[0]; i < stop; i++){
-    //     out[i].resize(newShape[1]);
-    // }
-    for (int i = 0, stop = newShape[0]; i < stop; i++){
-        out[i] = new int[newShape[1]];
-    }
-    for (int i = 0, stop = newShape[0] * newShape[1]; i < stop; i++){
-        int y = i / newShape[1];
-        int x = i % newShape[1];
-        out[y][x] = input[i];
-
-    }
-
-    return out;
-}
 
