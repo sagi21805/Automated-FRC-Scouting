@@ -4,6 +4,7 @@
 #include "imgAlgsCpu.hpp"
 
 using namespace std;
+using namespace cv;
 
 /*
 Field class Constructour

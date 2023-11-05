@@ -14,7 +14,6 @@ double max(Mat frame){
 
 	double highest;
 	cv::minMaxLoc(frame, NULL, &highest, NULL, NULL);
-
 	return highest;
 }
 

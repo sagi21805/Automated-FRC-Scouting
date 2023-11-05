@@ -29,15 +29,15 @@ extern "C"{
         
     }
 
-    Tracker* newTracker(){
+    Tracker* newTracker(int *pointsWithClasses, int size){
 
-        return new Tracker();
+        return new Tracker(pointsWithClasses, size);
 
     }
     
     void _stablePoints(Tracker* t, int *points, int size, int **outArr){
 
-        t -> stablePoints(points, size, outArr);
+        t -> stablePoints(points, size);
 
     }
 

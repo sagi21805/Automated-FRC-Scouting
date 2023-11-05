@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "robot.hpp"
 
-using cv::Mat;
+using cv::Mat, cv::VideoCapture;
 
 void skipFrames(VideoCapture cap, short int framesToSkip);
 

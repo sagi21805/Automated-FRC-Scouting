@@ -58,7 +58,7 @@ int* BoundingBox::findCenter(){
     return center;
 }
 
-bool BoundingBox::isIntersectingTo(BoundingBox b, int difference = 0){
+bool BoundingBox::isIntersectingTo(BoundingBox b, int difference){
  
 	return this->getBox()[0] < (b.getBox()[0] + b.getBox()[2]+ difference) && (this->getBox()[0] + this->getBox()[2]) > (b.getBox()[0] - difference) && this->getBox()[1] < (b.getBox()[1] + b.getBox()[3]+ difference) && (this->getBox()[1] + this->getBox()[3]) > (b.getBox()[1] - difference);
 	
