@@ -9,11 +9,8 @@ using std::cout, std::endl;
 
 Tracker::Tracker(int *pointsWithClass, int size){
 
-	cout << "creating" << endl;
 	this->numOfPoints = size;
-	cout << "..." << endl;
-    // this->setTrackPoints(pointsWithClass, size);
-	cout << "..." << endl;
+    this->setTrackPoints(pointsWithClass, size);
 
 }
 
