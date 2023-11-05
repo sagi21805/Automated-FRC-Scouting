@@ -26,6 +26,8 @@ def c_float(float: float):
 
 def c_bool(bool: bool):
     return ctypes.c_bool(bool)
+
+object = ctypes.POINTER(ctypes.c_char)
     
 short = ctypes.c_int16
 

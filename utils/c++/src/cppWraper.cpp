@@ -5,7 +5,7 @@
 
 extern "C"{
 
-    Field* newField(const char *path){
+    Field* _Field(const char *path){
 
         return new Field(path);
 
@@ -17,25 +17,25 @@ extern "C"{
 
     }
 
-    Robot* RobotDefualt(){
+    Robot* _RobotDefualt(){
 
         return new Robot();
 
     }
 
-    Robot* newRobot(int teamNumber, bool team, int p1[], int p2[]){
+    Robot* _Robot(int teamNumber, bool team, int p1[], int p2[]){
 
         return new Robot(teamNumber,team ,p1 ,p2);
         
     }
 
-    Tracker* newTracker(int *pointsWithClasses, int size){
+    Tracker* _Tracker(int *pointsWithClasses, int size){
 
         return new Tracker(pointsWithClasses, size);
 
     }
     
-    void _stablePoints(Tracker* t, int *points, int size, int **outArr){
+    void _stablePoints(Tracker* t, int *points, int size){
 
         t -> stablePoints(points, size);
 
