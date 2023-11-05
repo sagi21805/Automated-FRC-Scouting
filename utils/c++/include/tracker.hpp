@@ -7,6 +7,7 @@ class Tracker{
     
     private:
         BoundingBox* currentStableTrack;
+        int numOfPoints;
     
     public:
         Tracker(int *pointsWithClass, int size);
@@ -17,7 +18,7 @@ class Tracker{
 
         BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size);
 
-        BoundingBox* stablePoints(int *points, int size);
+        void stablePoints(int *points, int size);
 
 };
 

@@ -1,4 +1,4 @@
-#include <opencv2/opencv.hpp>
+#include <opencv4/opencv2/opencv.hpp>
 #include <stdio.h>
 #include "vectorFuncs.hpp"
 #include "mathUtils.hpp"
@@ -8,11 +8,22 @@
 using std::cout, std::endl;
 
 Tracker::Tracker(int *pointsWithClass, int size){
-    this->setTrackPoints(pointsWithClass, size);
+
+	cout << "creating" << endl;
+	this->numOfPoints = size;
+	cout << "..." << endl;
+    // this->setTrackPoints(pointsWithClass, size);
+	cout << "..." << endl;
+
 }
 
+
+
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
-	this->currentStableTrack = stablePoints(pointsWithClass, size);
+	
+	this->numOfPoints = size;
+	this->stablePoints(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
+
 }
 
 BoundingBox* Tracker::getTrackPoints(){
@@ -41,7 +52,7 @@ BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
 
 }
 
-BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
+void Tracker::stablePoints(int *pointsWithClass, int size){
 
 	short int pointsSize = 5; //points: [x, y, width, hieght, class]
 
@@ -87,8 +98,7 @@ BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 		}
 	}
 
-	BoundingBox out[size-reduced];
-
+	BoundingBox stable[size-reduced];
 
 	short int constant = 0;
 	
@@ -98,16 +108,16 @@ BoundingBox* Tracker::stablePoints(int *pointsWithClass, int size){
 
 	for (int real = 0; real < size - reduced; real++){
 		if (real == similar[real] + constant){
-			avrageBoundingBoxes(out[real], boundingBoxes, similar[real] + constant, similar[real+1] + constant);
+			avrageBoundingBoxes(stable[real], boundingBoxes, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
 		}
 		else{
-			out[real].setBox(boundingBoxes[real + constant].getBox());
+			stable[real].setBox(boundingBoxes[real + constant].getBox());
 		}
 		
 	}
 	
-
+	this->currentStableTrack = stable;
 }
 
 	

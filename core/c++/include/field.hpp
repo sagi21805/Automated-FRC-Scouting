@@ -1,6 +1,6 @@
 #ifndef __FIELD__HPP
 #define __FIELD__HPP
-#include <opencv2/opencv.hpp>
+#include <opencv4/opencv2/opencv.hpp>
 #include "robot.hpp"
 
 using cv::Mat, cv::Size;
