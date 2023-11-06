@@ -8,47 +8,29 @@
 using std::cout, std::endl;
 
 Tracker::Tracker(int *pointsWithClass, int size){
+	this->setTrackPoints(pointsWithClass, size);
+}
 
-	this->currentBoundingBoxes;
-
+Tracker::~Tracker(){
+	delete[] currentBoundingBoxes;
+	delete[] stableBoundingBoxes;
+	delete[] lastStableBoundingBoxes;
 }
 
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
-	
-	this->currentBoundingBoxes = this->pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
+	this-> numOfCurrentBoundingBoxes = size;
 
+	this->currentBoundingBoxes = pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
 }
 
 BoundingBox* Tracker::getStableBoundingBoxes(){
 	return this->stableBoundingBoxes;
 }
 
-BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
-	
-	BoundingBox boundingBoxes[size];
-
-	int pointWithClass[5];
-	int constant = 0;
-
-	for (int i = 1; i < size + 1; i++){
-
-		for (int j = 0; i < 5; i++){
-			pointWithClass[j] = pointsWithClass[j + constant];
-		}
-
-		constant += 5;
-
-		boundingBoxes[i] = BoundingBox(pointWithClass, i);	
-	}
-
-	return boundingBoxes;
-
-}
-
 int* Tracker::findSimilarBoundingBoxes(){
 	
 	unsigned short reduced = 0;
-	int similar[this->numOfCurrentBoundingBoxes + 1]; // [locA, locB, locA, locB] (locA and locB are similar).
+	int* similar = new int[this->numOfCurrentBoundingBoxes + 1]; // [locA, locB, locA, locB] (locA and locB are similar).
 	unsigned short index = 0;
 	const int distance = 150;
 
@@ -85,12 +67,12 @@ int* Tracker::findSimilarBoundingBoxes(){
 
 		}
 
-		similar[this->numOfCurrentBoundingBoxes] = reduced;
-
-		return similar;
 
 	}
 
+	similar[this->numOfCurrentBoundingBoxes] = reduced;
+
+	return similar;
 
 }
 
@@ -99,7 +81,7 @@ void Tracker::stablePoints(){
 
 	int *similar = this->findSimilarBoundingBoxes();
 	int constant = 0;
-	BoundingBox stable[this->numOfCurrentBoundingBoxes];
+	BoundingBox* stable = new BoundingBox[this->numOfCurrentBoundingBoxes];
 
 	for (int real = 0, size = this->numOfCurrentBoundingBoxes, reduced = similar[size]; real < size - reduced; real++){
 		if (real == similar[real] + constant){
@@ -112,7 +94,10 @@ void Tracker::stablePoints(){
 		
 	}
 	
+	this->numOfLastStableBoundingBoxes = this->numOfStableBoundingBoxes;
+	this-> numOfStableBoundingBoxes = this->numOfCurrentBoundingBoxes - similar[this->numOfCurrentBoundingBoxes];
 	this->stableBoundingBoxes = stable;
+	delete[] similar;
 }
 
 	

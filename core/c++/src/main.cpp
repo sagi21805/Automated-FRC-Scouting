@@ -1,15 +1,15 @@
-#include <opencv2/opencv.hpp>
-#include "field.hpp"
-#include <stdio.h>
+// #include <opencv2/opencv.hpp>
+// #include "field.hpp"
+// #include <stdio.h>
 
 
-int main(){
+// int main(){
 
-    std::cout << cv::getBuildInformation() << std::endl;
+//     std::cout << cv::getBuildInformation() << std::endl;
 
-    Field f("/home/sagi21805/Downloads/dcmp.mp4");
-    f.run();
+//     Field f("/home/sagi21805/Downloads/dcmp.mp4");
+//     f.run();
     
-}
+// }
 
 

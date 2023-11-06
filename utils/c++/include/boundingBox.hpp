@@ -20,7 +20,9 @@ class BoundingBox{
 
         BoundingBox();
         BoundingBox(int *pointWithClasses, int id);
-
+        
+        ~BoundingBox();
+        
         void setBox(int *pointWithClasses);
 
         int* getBox();
@@ -39,9 +41,12 @@ class BoundingBox{
 
         int* findCenter();
 
+        void print();
 
 
 };
+
+BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size);
 
 void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc);
 

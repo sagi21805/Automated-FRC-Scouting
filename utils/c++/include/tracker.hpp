@@ -7,23 +7,25 @@ class Tracker{
     
     private:
 
-        BoundingBox* currentBoundingBoxes = nullptr;
         BoundingBox* stableBoundingBoxes = nullptr;
         BoundingBox* lastStableBoundingBoxes = nullptr;
-        int numOfCurrentBoundingBoxes = 0;
         int numOfStableBoundingBoxes = 0;
         int numOfLastStableBoundingBoxes = 0;
     
     public:
+
+        BoundingBox* currentBoundingBoxes = nullptr;
+        int numOfCurrentBoundingBoxes = 0;
+
         Tracker(int *pointsWithClass, int size);
+
+        ~Tracker();
 
         void setTrackPoints(int *pointsWithClass, int size);
 
         BoundingBox* getStableBoundingBoxes();
 
         int* findSimilarBoundingBoxes();
-
-        BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size);
 
         void stablePoints();
 

@@ -1,12 +1,15 @@
 #include "boundingBox.hpp"
 #include "mathUtils.hpp"
+#include <iostream>
+
+using std::cout;
 
 BoundingBox::BoundingBox(){
     this->id = -1;
 }
 
 BoundingBox::BoundingBox(int *pointWithClass, int id){
-    
+
     this-> id = id;
 
     this->setBox(pointWithClass);
@@ -15,8 +18,13 @@ BoundingBox::BoundingBox(int *pointWithClass, int id){
 
 }
 
+BoundingBox::~BoundingBox(){
+    cout << "DESTROYED\n";
+    delete[] this->center;
+}
+
 void BoundingBox::setBox(int *pointWithClass){
-    
+
     memcpy(this->box, pointWithClass, 4 * sizeof(int));
     
     this->center = findCenter();
@@ -25,6 +33,15 @@ void BoundingBox::setBox(int *pointWithClass){
 
     this->perimeter = 2 * (pointWithClass[2] + pointWithClass[3]);
     
+}
+
+void BoundingBox::print(){
+    cout << "id " << this->id << "\n"; 
+    cout << "x " << this->box[0] << " y " << this->box[1] << " w " << this->box[2] << " h " << this->box[3] << "\n"; //[x, y, w, h]
+    cout << "type " << this->type << "\n";
+    cout << "area " << this->area << "\n";
+    cout << "perimeter " << this->perimeter << "\n";
+    cout << "center " << *this->center << "\n";
 }
 
 int* BoundingBox::getBox(){
@@ -53,8 +70,10 @@ bool BoundingBox::isCloseTo(BoundingBox b, double distance){
 
 int* BoundingBox::findCenter(){
 
-	int center[2] = {this->box[0] + this->box[2] / 2, this->box[1] + this->box[3] / 2};
-    
+    int* center = new int[2]; 
+	center[0] = this->box[0] + this->box[2] / 2;
+    center[1] = this->box[1] + this->box[3] / 2;
+
     return center;
 }
 
@@ -81,5 +100,21 @@ void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int start
     int out[4] = {x/times, y/times, w/times, h/times};
 
     dest.setBox(out);
+
+}
+
+BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size){
+	
+	BoundingBox* boundingBoxes = new BoundingBox[size];
+
+	int pointWithClass[5]; //[x y w h Class] // TODO may be smarter with a smart pointer
+
+	for (int i = 0; i < size; i++){
+
+		memcpy(&pointWithClass[0], &pointsWithClass[i*5], 5 * sizeof(int));
+		boundingBoxes[i] = BoundingBox(pointWithClass, i);	
+	}
+
+	return boundingBoxes;
 
 }

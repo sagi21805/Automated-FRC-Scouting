@@ -16,23 +16,23 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/utils/c++/src
 )
 
-# file(GLOB all_SRCS
-#         "${PROJECT_SOURCE_DIR}/core/c++/include/*.h"
-#         "${PROJECT_SOURCE_DIR}/core/c++/include/*.hpp"
-#         "${PROJECT_SOURCE_DIR}/core/c++/src/*.cpp"
-#         "${PROJECT_SOURCE_DIR}/core/c++/src/*.c"
-#         "${PROJECT_SOURCE_DIR}/utils/c++/include/*.h"
-#         "${PROJECT_SOURCE_DIR}/utils/c++/include/*.hpp"
-#         "${PROJECT_SOURCE_DIR}/utils/c++/src/*.cpp"
-#         "${PROJECT_SOURCE_DIR}/utils/c++/src/*.c"
-#         )
-
 file(GLOB all_SRCS
-        "${PROJECT_SOURCE_DIR}/test/*.cpp"
+        "${PROJECT_SOURCE_DIR}/core/c++/include/*.h"
+        "${PROJECT_SOURCE_DIR}/core/c++/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/core/c++/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/core/c++/src/*.c"
+        "${PROJECT_SOURCE_DIR}/utils/c++/include/*.h"
+        "${PROJECT_SOURCE_DIR}/utils/c++/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/utils/c++/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/utils/c++/src/*.c"
         )
 
+# file(GLOB all_SRCS
+#         "${PROJECT_SOURCE_DIR}/test/*.cpp"
+#         )
+
         
-        # add_library( ${PROJECT_NAME} SHARED ${all_SRCS})
+# add_library( ${PROJECT_NAME} SHARED ${all_SRCS})
 add_executable(  ${PROJECT_NAME} ${all_SRCS})
         
 target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS})
