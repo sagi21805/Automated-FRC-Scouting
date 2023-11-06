@@ -9,22 +9,18 @@ using std::cout, std::endl;
 
 Tracker::Tracker(int *pointsWithClass, int size){
 
-	this->numOfPoints = size;
-    this->setTrackPoints(pointsWithClass, size);
+	this->currentBoundingBoxes;
 
 }
-
-
 
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
 	
-	this->numOfPoints = size;
-	this->stablePoints(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
+	this->currentBoundingBoxes = this->pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
 
 }
 
-BoundingBox* Tracker::getTrackPoints(){
-	return this->currentStableTrack;	
+BoundingBox* Tracker::getStableBoundingBoxes(){
+	return this->stableBoundingBoxes;
 }
 
 BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
@@ -49,30 +45,25 @@ BoundingBox* Tracker::pointsToBoundingBoxes(int *pointsWithClass, int size){
 
 }
 
-void Tracker::stablePoints(int *pointsWithClass, int size){
-
-	short int pointsSize = 5; //points: [x, y, width, hieght, class]
-
-	BoundingBox *boundingBoxes = pointsToBoundingBoxes(pointsWithClass, size);
-
-	unsigned short int reduced = 0;
-	int similar[size]; // [locA, locB, locA, locB] (locA and locB are similar).
-	for (int i = 0; i < size; i++){
-		similar[i] = size + 1;
-	}
-	short int index = 0;
+int* Tracker::findSimilarBoundingBoxes(){
+	
+	unsigned short reduced = 0;
+	int similar[this->numOfCurrentBoundingBoxes + 1]; // [locA, locB, locA, locB] (locA and locB are similar).
+	unsigned short index = 0;
 	const int distance = 150;
 
-	for (int i = 0; i < size - 1; i++){
+	for (int i = 0, size = this->numOfCurrentBoundingBoxes; i < size ; i++){
+		
+		similar[i] = size + 1; 
 
-		if (boundingBoxes[i].isCloseTo(boundingBoxes[i+1], distance) && boundingBoxes[i].getType() == boundingBoxes[i+1].getType()){
+		if (this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], distance) && this->currentBoundingBoxes[i].getType() == this->currentBoundingBoxes[i+1].getType()){
 
 			similar[index] = i;
 			similar[index + 1] = i + 1;
 
 			for (int k = i + 1; k < size - i -1 ; k++){
 
-				if (boundingBoxes[k].isCloseTo(boundingBoxes[k+1], distance) && boundingBoxes[k].getType() == boundingBoxes[k+1].getType() && boundingBoxes[i].isCloseTo(boundingBoxes[i+1], (distance-50) * (k-i+1.5)) && boundingBoxes[i].getType() == boundingBoxes[i+1].getType()){
+				if (this->currentBoundingBoxes[k].isCloseTo(this->currentBoundingBoxes[k+1], distance) && this->currentBoundingBoxes[k].getType() == this->currentBoundingBoxes[k+1].getType() && this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], (distance-50) * (k-i+1.5)) && this->currentBoundingBoxes[i].getType() == this->currentBoundingBoxes[i+1].getType()){
 					
 					similar[index + 1] = k + 1;
 
@@ -93,28 +84,35 @@ void Tracker::stablePoints(int *pointsWithClass, int size){
 			index+=2;
 
 		}
+
+		similar[this->numOfCurrentBoundingBoxes] = reduced;
+
+		return similar;
+
 	}
 
-	BoundingBox stable[size-reduced];
 
-	short int constant = 0;
-	
-	for (int i = 0; i < size; i++){
-		cout <<  similar[i] << " "; 
-	}	
+}
 
-	for (int real = 0; real < size - reduced; real++){
+
+void Tracker::stablePoints(){
+
+	int *similar = this->findSimilarBoundingBoxes();
+	int constant = 0;
+	BoundingBox stable[this->numOfCurrentBoundingBoxes];
+
+	for (int real = 0, size = this->numOfCurrentBoundingBoxes, reduced = similar[size]; real < size - reduced; real++){
 		if (real == similar[real] + constant){
-			avrageBoundingBoxes(stable[real], boundingBoxes, similar[real] + constant, similar[real+1] + constant);
+			avrageBoundingBoxes(stable[real], this->currentBoundingBoxes, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
 		}
 		else{
-			stable[real].setBox(boundingBoxes[real + constant].getBox());
+			stable[real].setBox(this->currentBoundingBoxes[real + constant].getBox());
 		}
 		
 	}
 	
-	this->currentStableTrack = stable;
+	this->stableBoundingBoxes = stable;
 }
 
 	

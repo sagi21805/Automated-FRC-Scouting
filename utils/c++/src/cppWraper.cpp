@@ -35,9 +35,9 @@ extern "C"{
 
     }
     
-    void _stablePoints(Tracker* t, int *points, int size){
+    void _stablePoints(Tracker* t){
 
-        t -> stablePoints(points, size);
+        t -> stablePoints();
 
     }
 
