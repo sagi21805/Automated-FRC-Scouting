@@ -12,6 +12,7 @@ Tracker::Tracker(int *pointsWithClass, int size){
 }
 
 Tracker::~Tracker(){
+	cout << "Tracker Destructor\n";
 	delete[] currentBoundingBoxes;
 	delete[] stableBoundingBoxes;
 	delete[] lastStableBoundingBoxes;

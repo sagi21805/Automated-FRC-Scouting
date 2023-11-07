@@ -83,9 +83,6 @@ Field Destructour
 */
 Field::~Field(){
 
-	if (this->pathToGame != NULL){
-		free(this->pathToGame);
-	}
 
 }
 

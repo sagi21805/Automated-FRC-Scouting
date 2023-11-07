@@ -9,26 +9,19 @@ BoundingBox::BoundingBox(){
 }
 
 BoundingBox::BoundingBox(int *pointWithClass, int id){
-
     this-> id = id;
-
     this->setBox(pointWithClass);
-
     this->type = (char) pointWithClass[4];
-
 }
 
 BoundingBox::~BoundingBox(){
     cout << "DESTROYED\n";
-    delete[] this->center;
 }
 
 void BoundingBox::setBox(int *pointWithClass){
 
     memcpy(this->box, pointWithClass, 4 * sizeof(int));
-    
-    this->center = findCenter();
-
+    findCenter(this->center);
     this->area = pointWithClass[2] * pointWithClass[3]; //w * h
 
     this->perimeter = 2 * (pointWithClass[2] + pointWithClass[3]);
@@ -68,13 +61,9 @@ bool BoundingBox::isCloseTo(BoundingBox b, double distance){
 	return this->squareDistanceTo(b) <  distance;
 }
 
-int* BoundingBox::findCenter(){
-
-    int* center = new int[2]; 
+int* BoundingBox::findCenter(int (&center)[2]){
 	center[0] = this->box[0] + this->box[2] / 2;
     center[1] = this->box[1] + this->box[3] / 2;
-
-    return center;
 }
 
 bool BoundingBox::isIntersectingTo(BoundingBox b, int difference){
@@ -106,15 +95,13 @@ void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int start
 BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size){
 	
 	BoundingBox* boundingBoxes = new BoundingBox[size];
-
 	int pointWithClass[5]; //[x y w h Class] // TODO may be smarter with a smart pointer
 
 	for (int i = 0; i < size; i++){
-
 		memcpy(&pointWithClass[0], &pointsWithClass[i*5], 5 * sizeof(int));
-		boundingBoxes[i] = BoundingBox(pointWithClass, i);	
+        boundingBoxes[i] = BoundingBox(pointWithClass, i);
 	}
-
+    
 	return boundingBoxes;
 
 }

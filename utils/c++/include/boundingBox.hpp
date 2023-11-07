@@ -14,7 +14,7 @@ class BoundingBox{
         char type; 
         int area;
         int perimeter;
-        int* center;
+        int center[2];
 
     public:
 
@@ -39,7 +39,7 @@ class BoundingBox{
 
         bool isCloseTo(BoundingBox b, double distance);
 
-        int* findCenter();
+        int* findCenter(int (&center)[2]);
 
         void print();
 

@@ -8,7 +8,6 @@
 
 using std::vector;
 
-//TODO imporve to Nd arrays.
 template <typename S>
 std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector){
     // Printing all the elements
