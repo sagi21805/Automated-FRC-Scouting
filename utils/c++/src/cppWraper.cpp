@@ -6,39 +6,22 @@
 extern "C"{
 
     Field* _Field(const char *path){
-
         return new Field(path);
-
     }
-
     void run(Field* f){
-
         f -> run();
-
     }
-
     Robot* _RobotDefualt(){
-
         return new Robot();
-
     }
-
     Robot* _Robot(int teamNumber, bool team, int p1[], int p2[]){
-
         return new Robot(teamNumber,team ,p1 ,p2);
-        
     }
-
     Tracker* _Tracker(int *pointsWithClasses, int size){
-
         return new Tracker(pointsWithClasses, size);
-
     }
-    
-    void _stablePoints(Tracker* t){
-
-        t -> stablePoints();
-
+    void _setTrackPoints(Tracker* t, int* points, int size){
+        t -> setTrackPoints(points, size);
     }
 
 }

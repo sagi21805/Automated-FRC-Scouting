@@ -22,6 +22,9 @@ void Tracker::setTrackPoints(int *pointsWithClass, int size){
 	this-> numOfCurrentBoundingBoxes = size;
 
 	this->currentBoundingBoxes = pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
+	for (int i = 0; i < size; i++){
+		this->currentBoundingBoxes[i].print();
+	}
 }
 
 BoundingBox* Tracker::getStableBoundingBoxes(){

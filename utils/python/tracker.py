@@ -9,11 +9,11 @@ class Tracker():
         cpp.lib.newTracker.restype = cpp.object
         self.obj = cpp.lib._Tracker(points, size)
         
-    def stablePoints(self, points: np.ndarray[int], size:int):
+    def setTrackPoints(self, points: np.ndarray[int], size:int):
         
         cpp.lib.newTracker.argtypes = [cpp.int_array, cpp.int]
         cpp.lib.newTracker.restype = cpp.object
-        cpp.lib._stablePoints(points, cpp.c_int(size))
+        cpp.lib._setTrackPoints(self.obj, points, cpp.c_int(size))
         
     
         
