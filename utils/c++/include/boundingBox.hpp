@@ -30,15 +30,11 @@ class BoundingBox{
 
         int* getCenter();
 
-        char getType();
-
         int squareDistanceTo(BoundingBox b);
 
         bool isIntersectingTo(BoundingBox b, int difference = 0);
 
         bool isCloseTo(BoundingBox b, double distance);
-
-        int* findCenter(int (&center)[2]);
 
         void print();
 
