@@ -4,6 +4,8 @@ import numpy as np
 import time
 from tracker import Tracker
 
+#TEST CODE DONT TAKE SERIOUSLY
+
 cap = cv2.VideoCapture('/home/sagi/Downloads/dcmp.mp4')
 modelBumpers = YOLO('data/BumperWeights.pt')
 

@@ -1,3 +1,11 @@
+"""
+cpp_utils
+===
+
+In this module are useful types and functions 
+that help communicate with the cpp program
+"""
+
 import numpy as np
 import ctypes
 
