@@ -1,6 +1,4 @@
 #include "boundingBox.hpp"
-#include "mathUtils.hpp"
-#include <iostream>
 
 using std::cout;
 
@@ -73,7 +71,7 @@ bool BoundingBox::isIntersectingTo(BoundingBox b, int difference){
 }
 
 //TODO fix this to work with BoundingBoxes
-void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc){
+void avrageBoundingBoxes(BoundingBox dest, std::shared_ptr<BoundingBox[]> boundingBoxes, int startLoc, int stopLoc){
 
 
     int x = 0, y = 0, w = 0, h = 0;
@@ -92,9 +90,10 @@ void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int start
 
 }
 
-BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size){
+
+std::shared_ptr<BoundingBox[]> pointsToBoundingBoxes(int *pointsWithClass, int size){
 	
-	BoundingBox* boundingBoxes = new BoundingBox[size];
+	std::shared_ptr<BoundingBox[]> boundingBoxes(new BoundingBox[size]);
 	int pointWithClass[5]; //[x y w h Class] // TODO may be smarter with a smart pointer
 
 	for (int i = 0; i < size; i++){

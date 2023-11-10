@@ -3,7 +3,8 @@
 
 #include "mathUtils.hpp"
 #include <opencv4/opencv2/opencv.hpp>
-
+#include <iostream>
+#include <memory>
 
 class BoundingBox{
 
@@ -46,8 +47,8 @@ class BoundingBox{
 
 };
 
-BoundingBox* pointsToBoundingBoxes(int *pointsWithClass, int size);
+std::shared_ptr<BoundingBox[]> pointsToBoundingBoxes(int *pointsWithClass, int size);
 
-void avrageBoundingBoxes(BoundingBox dest, BoundingBox* boundingBoxes, int startLoc, int stopLoc);
+void avrageBoundingBoxes(BoundingBox dest, std::shared_ptr<BoundingBox[]> boundingBoxes, int startLoc, int stopLoc);
 
 #endif 

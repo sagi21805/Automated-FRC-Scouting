@@ -2,19 +2,17 @@
 #define __TRACKER_HPP
 
 #include "boundingBox.hpp"
+#include <memory>
 
 class Tracker{
     
-    private:
-
-        BoundingBox* stableBoundingBoxes = nullptr;
-        BoundingBox* lastStableBoundingBoxes = nullptr;
-        int numOfStableBoundingBoxes = 0;
-        int numOfLastStableBoundingBoxes = 0;
-    
     public:
 
-        BoundingBox* currentBoundingBoxes = nullptr;
+        std::unique_ptr<BoundingBox[]> stableBoundingBoxes;
+        std::unique_ptr<BoundingBox[]> lastStableBoundingBoxes;
+        std::shared_ptr<BoundingBox[]> currentBoundingBoxes;
+        int numOfStableBoundingBoxes = 0;
+        int numOfLastStableBoundingBoxes = 0;
         int numOfCurrentBoundingBoxes = 0;
 
         Tracker(int *pointsWithClass, int size);
@@ -23,7 +21,6 @@ class Tracker{
 
         void setTrackPoints(int *pointsWithClass, int size);
 
-        BoundingBox* getStableBoundingBoxes();
 
         int* findSimilarBoundingBoxes();
 

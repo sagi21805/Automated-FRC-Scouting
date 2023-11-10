@@ -13,9 +13,6 @@ Tracker::Tracker(int *pointsWithClass, int size){
 
 Tracker::~Tracker(){
 	cout << "Tracker Destructor\n";
-	delete[] currentBoundingBoxes;
-	delete[] stableBoundingBoxes;
-	delete[] lastStableBoundingBoxes;
 }
 
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
@@ -25,10 +22,6 @@ void Tracker::setTrackPoints(int *pointsWithClass, int size){
 	for (int i = 0; i < size; i++){
 		this->currentBoundingBoxes[i].print();
 	}
-}
-
-BoundingBox* Tracker::getStableBoundingBoxes(){
-	return this->stableBoundingBoxes;
 }
 
 int* Tracker::findSimilarBoundingBoxes(){
@@ -85,22 +78,21 @@ void Tracker::stablePoints(){
 
 	int *similar = this->findSimilarBoundingBoxes();
 	int constant = 0;
-	BoundingBox* stable = new BoundingBox[this->numOfCurrentBoundingBoxes];
+	this->stableBoundingBoxes = std::make_unique<BoundingBox[]>(this->numOfCurrentBoundingBoxes);
 
 	for (int real = 0, size = this->numOfCurrentBoundingBoxes, reduced = similar[size]; real < size - reduced; real++){
 		if (real == similar[real] + constant){
-			avrageBoundingBoxes(stable[real], this->currentBoundingBoxes, similar[real] + constant, similar[real+1] + constant);
+			avrageBoundingBoxes(this->stableBoundingBoxes[real], this->currentBoundingBoxes, similar[real] + constant, similar[real+1] + constant);
 			constant += (similar[real+1] - similar[real]);
 		}
 		else{
-			stable[real].setBox(this->currentBoundingBoxes[real + constant].getBox());
+			this->stableBoundingBoxes[real].setBox(this->currentBoundingBoxes[real + constant].getBox());
 		}
 		
 	}
 	
 	this->numOfLastStableBoundingBoxes = this->numOfStableBoundingBoxes;
 	this-> numOfStableBoundingBoxes = this->numOfCurrentBoundingBoxes - similar[this->numOfCurrentBoundingBoxes];
-	this->stableBoundingBoxes = stable;
 	delete[] similar;
 }
 

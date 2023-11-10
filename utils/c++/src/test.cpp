@@ -1,16 +1,18 @@
-// #include "tracker.hpp"
-// #include <iostream>
+#include "tracker.hpp"
+#include <iostream>
 
-// using std::cout;
+using std::cout;
 
-// int main(){
+int main(){
 
-//     int size = 2;
-//     int points[10] = {2, 2, 6, 6, 0, 4, 4, 6, 6, 1};
+    int size = 2;
+    int points[10] = {2, 2, 6, 6, 0, 4, 4, 6, 6, 1};
 
-//     Tracker t(points, size);
+    Tracker t(points, size);
 
-//     cout << "size " << t.numOfCurrentBoundingBoxes << "\n";
+    t.stablePoints();
+
+    cout << "size " << t.numOfCurrentBoundingBoxes << "\n";
     
-//     //TESTING STUFF
-// }
+    //TESTING STUFF
+}
