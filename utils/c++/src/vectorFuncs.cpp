@@ -16,7 +16,7 @@ vector<vector<int>> vector1Dto2D(vector<int> input, vector<size_t> newShape){
         throw std::invalid_argument( "input shape and the wanted shape dont align" );
     }
     
-    vector<vector< int>> out(newShape[0]);
+    vector<vector<int>> out(newShape[0]);
 
     for (int i = 0, stop = newShape[0]; i < stop; i++){
         out[i].resize(newShape[1]);

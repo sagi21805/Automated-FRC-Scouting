@@ -4,12 +4,13 @@ using cv::Mat, cv::VideoCapture;
 
 /*
 Skips given number of frames
-----------------------------
-- Args:
-`cap` the vidoe instance that is being captured
-`framesToSkip` the number of frames that is being skipped
+-
+Args:
+
+ - `cap (cv::VideoCapture)` -> the vidoe instance that is being captured
+ - `framesToSkip (short)` -> the number of frames that is being skipped
 */
-void skipFrames(VideoCapture cap, short int framesToSkip){
+void skipFrames(VideoCapture cap, short framesToSkip){
 
 	Mat blank;
 	for (int i = 0; i < framesToSkip; i++){
@@ -20,11 +21,12 @@ void skipFrames(VideoCapture cap, short int framesToSkip){
 
 /*
 Filters the Red color from a given frame.
------------------------------------------
-- Args:
-`frame` the frame being minPooled
-- Return:
-`filtered` the filtered Frame
+-
+Args:
+- `frame (Mat)` -> the frame being filtered
+
+Returns:
+- `filtered (Mat)` -> the filtered Frame
 */
 Mat filterRed(Mat frame){
 
@@ -42,12 +44,13 @@ Mat filterRed(Mat frame){
 }
 
 /*
-Filters the Red color from a given frame.
-------------------------------------------
+Filters the Blue color from a given frame.
+-
 Args:
-`frame` the frame being minPooled
-Return:
-`filtered` the filtered Frame
+- `frame (Mat)` -> the frame being filtered
+
+Returns:
+- `filtered` (Mat) -> the filtered Frame
 */
 Mat filterBlue(Mat frame){
 

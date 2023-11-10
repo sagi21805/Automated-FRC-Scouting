@@ -14,8 +14,8 @@ BoundingBox::BoundingBox(){
 BoundingBox constractor.
 -
 Args:
- - pointWithClass (int[]) -> xywh point with class [x, y, w, h, c].
- - id (int) -> Represents that id of the BoundingBox.
+ - `pointWithClass (int[])` -> xywh point with class [x, y, w, h, c].
+ - `id (int)` -> Represents that id of the BoundingBox.
 */
 BoundingBox::BoundingBox(int *pointWithClass, int id){
     this-> id = id;
@@ -27,7 +27,7 @@ BoundingBox::BoundingBox(int *pointWithClass, int id){
 Sets the box and other parameters of the BoundingBox.
 -
 Args:
- - pointWithClass (int[]) -> xywh point with class [x, y, w, h, c].
+ - `pointWithClass (int[])` -> xywh point with class [x, y, w, h, c].
 */
 void BoundingBox::setBox(int *pointWithClass){
 
@@ -79,23 +79,23 @@ int* BoundingBox::getCenter(){
 Returns The square distance between centers to a BoundingBox.
 -
 Args: 
- - boundingBox (BoundingBox) -> the BoundingBox to claculate center to.
+ - `boundingBox (BoundingBox)` -> the BoundingBox to claculate center to.
 
 Returns:
- - squareDistance (int) -> the distance to the BoundingBox.
+ - `squareDistance (int)` -> the distance to the BoundingBox.
 */
-int BoundingBox::squareDistanceTo(BoundingBox boundingBox){
-    return squareDistance(this->center, boundingBox.getCenter());
+double BoundingBox::squareDistanceTo(BoundingBox boundingBox){
+    return squareDistance<int, int>(this->center, boundingBox.getCenter());
 }
 
 /*
 Returns if a BoundingBox is close to this BoundingBox by a certain distance.
 -
 Args: 
- - boundingBox (BoundingBox) -> the BoundingBox to claculate distance to.
+ - `boundingBox (BoundingBox)` -> the BoundingBox to claculate distance to.
 
 Returns:
- - isClose (bool) -> if close or not.
+ - `isClose (bool)` -> if close or not.
 */
 bool BoundingBox::isCloseTo(BoundingBox boundingBox, double distance){
 	return this->squareDistanceTo(boundingBox) <  distance;
@@ -105,11 +105,11 @@ bool BoundingBox::isCloseTo(BoundingBox boundingBox, double distance){
 Checks if this BoundingBox is intersecting to other BoundingBox.
 -
 Args: 
- - boundingBox (BoundingBox) -> the BoundingBox to check.
- - difference (int) -> the increse in size of one boundingBox to help intersect.
+ - `boundingBox (BoundingBox)` -> the BoundingBox to check.
+ - `difference (int)` -> the increse in size of one boundingBox to help intersect.
 
 Returns:
- - isIntersecting (bool) -> if intersecting to the BoundingBox or not.
+ - `isIntersecting (bool)` -> if intersecting to the BoundingBox or not.
 */
 bool BoundingBox::isIntersectingTo(BoundingBox boundingBox, int difference){
  
@@ -122,10 +122,10 @@ bool BoundingBox::isIntersectingTo(BoundingBox boundingBox, int difference){
 Avrages BoundingBoxes center from an array of BoundingBoxes.
 -
 Args: 
- - dest (BoundingBox) -> Output to the avraged BoundingBox.
- - boundingBoxes (shared_ptr<BoundingBoxes[]>) -> Shared_ptr the BoundingBox array.
- - startLoc (int) -> The location in the array to start avrage.
- - stopLoc (int) -> The location in the array to stop avrage 
+ - `dest (BoundingBox)` -> Output to the avraged BoundingBox.
+ - `boundingBoxes (shared_ptr<BoundingBoxes[]>)` -> Shared_ptr the BoundingBox array.
+ - `startLoc (int)` -> The location in the array to start avrage.
+ - `stopLoc (int)` -> The location in the array to stop avrage 
 
 */
 void avrageBoundingBoxes(BoundingBox dest, std::shared_ptr<BoundingBox[]> boundingBoxes, int startLoc, int stopLoc){
@@ -147,11 +147,11 @@ void avrageBoundingBoxes(BoundingBox dest, std::shared_ptr<BoundingBox[]> boundi
 Turn long int[] of points with classes into BoundingBoxes.
 -
 Args: 
- - pointWithClass (int[]) -> xywh point with class [x, y, w, h, c].
- - size (int) -> How many points are in the array (Size of the array / size of a point).
+ - `pointsWithClass (int[])` -> SORTED xywh points with classes [x, y, w, h, c].
+ - `size (int)` -> How many points are in the array (Size of the array / size of a point).
 
 Returns:
- - boundingBoxes (shared_ptr<BoundingBox[]>) -> shared_ptr to the array of BoundingBoxes.
+ - `boundingBoxes (shared_ptr<BoundingBox[]>)` -> shared_ptr to the array of BoundingBoxes.
 */
 std::shared_ptr<BoundingBox[]> pointsToBoundingBoxes(int *pointsWithClass, int size){
 	

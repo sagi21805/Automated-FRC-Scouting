@@ -30,7 +30,7 @@ class BoundingBox{
 
         int* getCenter();
 
-        int squareDistanceTo(BoundingBox b);
+        double squareDistanceTo(BoundingBox b);
 
         bool isIntersectingTo(BoundingBox b, int difference = 0);
 

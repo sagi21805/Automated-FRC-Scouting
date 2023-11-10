@@ -2,7 +2,6 @@
 #define __printVector__HPP
 
 #include <stdio.h>
-#include "cnpy.h"
 #include <iostream>
 #include <stdexcept>
 

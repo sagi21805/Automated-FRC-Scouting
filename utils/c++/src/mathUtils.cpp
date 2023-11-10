@@ -4,11 +4,12 @@
 using cv::Mat;
 
 /*
-Find Maximum in a matrix
+Returns the highest number in a matrix
+-
 Args:
-`frame` the frame being maxPooled
+ - `frame (Mat)` the frame being maxPooled
 return:
-`highest` the highest number in the frame
+- `highest (Double)` the highest number in the frame
 */
 double max(Mat frame){
 
@@ -18,11 +19,12 @@ double max(Mat frame){
 }
 
 /*
-Find Minimum a matrix
+Returns the lowest number in a matrix
+-
 Args:
-`frame` the frame being minPooled
+ - `frame (Mat)` the frame being maxPooled
 return:
-`lowest` the lowest number in the frame
+- `lowest (Double)` the lowest number in the frame
 */
 double min(Mat frame){
 
@@ -32,7 +34,16 @@ double min(Mat frame){
 	return lowest;
 }
 
-
-double squareDistance(int *pointA, int *pointB){
+/*
+Returns The square distance between two points.
+-
+Args: 
+ - `pointA (number[])` -> the first point.
+ - `pointB (number[])` -> the second point
+Returns:
+ - `squareDistance (int)` -> the distance between the points.
+*/
+template<typename T1, typename T2>
+double squareDistance(T1 *pointA, T2 *pointB){
     return pow(pointA[0] - pointB[0], 2) + pow(pointA[1] - pointB[1], 2);
 }

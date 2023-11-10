@@ -7,39 +7,56 @@
 
 using std::cout, std::endl;
 
+/*
+The default Tracker constractor
+-
+*/
 Tracker::Tracker(){
 	
 }
 
+/*
+Sets the current BoundingBoxes of the tracker
+-
+Args: 
+ - `pointsWithClass (int[])` -> SORTED xywh points with classes [x, y, w, h, c].
+ - `size (int)` -> How many points are in the array (Size of the array / size of a point).
+*/
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
-	this-> numOfCurrentBoundingBoxes = size;
 
+	this-> numOfCurrentBoundingBoxes = size;
 	this->currentBoundingBoxes = pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
-	// for (int i = 0; i < size; i++){
-	// 	this->currentBoundingBoxes[i].print();
-	// }
 	cout << "Created\n"; 
 }
 
+/*
+Finds points that are close together
+-
+Returns:
+ - `SimilarPoints (int[])` -> array of indexes of the similar points 
+[LocA, locB, locA, locB .... ,how many points removed]
+- `All points between LocA and locB are similar.`
+
+*/
 int* Tracker::findSimilarBoundingBoxes(){
 	
 	unsigned short reduced = 0;
-	int* similar = new int[this->numOfCurrentBoundingBoxes + 1]; // [locA, locB, locA, locB] (locA and locB are similar).
 	unsigned short index = 0;
 	const int distance = 150;
+	int* similar = new int[this->numOfCurrentBoundingBoxes + 1]; // [locA, locB, locA, locB] (locA and locB are similar).
 
 	for (int i = 0, size = this->numOfCurrentBoundingBoxes; i < size ; i++){
 		
 		similar[i] = size + 1; 
 
-		if (this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], distance) && this->currentBoundingBoxes[i].getType() == this->currentBoundingBoxes[i+1].getType()){
+		if (this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], distance) && this->currentBoundingBoxes[i].getClass() == this->currentBoundingBoxes[i+1].getClass()){
 
 			similar[index] = i;
 			similar[index + 1] = i + 1;
 
 			for (int k = i + 1; k < size - i -1 ; k++){
 
-				if (this->currentBoundingBoxes[k].isCloseTo(this->currentBoundingBoxes[k+1], distance) && this->currentBoundingBoxes[k].getType() == this->currentBoundingBoxes[k+1].getType() && this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], (distance-50) * (k-i+1.5)) && this->currentBoundingBoxes[i].getType() == this->currentBoundingBoxes[i+1].getType()){
+				if (this->currentBoundingBoxes[k].isCloseTo(this->currentBoundingBoxes[k+1], distance) && this->currentBoundingBoxes[k].getClass() == this->currentBoundingBoxes[k+1].getClass() && this->currentBoundingBoxes[i].isCloseTo(this->currentBoundingBoxes[i+1], (distance-50) * (k-i+1.5)) && this->currentBoundingBoxes[i].getClass() == this->currentBoundingBoxes[i+1].getClass()){
 					
 					similar[index + 1] = k + 1;
 
@@ -70,7 +87,10 @@ int* Tracker::findSimilarBoundingBoxes(){
 
 }
 
-
+/*
+Stables the BoundingBoxes that are stored in stableBoundingBoxes
+-
+*/
 void Tracker::stablePoints(){
 
 	int *similar = this->findSimilarBoundingBoxes();
