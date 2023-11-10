@@ -1,4 +1,6 @@
 
+import numpy as np
 
-for i in range(10):
-    print( i % 5)
+arr = np.array([1, 2, 3])
+
+print(np.reshape(arr, (arr.shape[0], 1)))
