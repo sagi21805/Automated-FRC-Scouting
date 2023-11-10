@@ -7,21 +7,18 @@
 
 using std::cout, std::endl;
 
-Tracker::Tracker(int *pointsWithClass, int size){
-	this->setTrackPoints(pointsWithClass, size);
-}
-
-Tracker::~Tracker(){
-	cout << "Tracker Destructor\n";
+Tracker::Tracker(){
+	
 }
 
 void Tracker::setTrackPoints(int *pointsWithClass, int size){
 	this-> numOfCurrentBoundingBoxes = size;
 
 	this->currentBoundingBoxes = pointsToBoundingBoxes(pointsWithClass, size); //sets the currentStableStack inside stablePoints.
-	for (int i = 0; i < size; i++){
-		this->currentBoundingBoxes[i].print();
-	}
+	// for (int i = 0; i < size; i++){
+	// 	this->currentBoundingBoxes[i].print();
+	// }
+	cout << "Created\n"; 
 }
 
 int* Tracker::findSimilarBoundingBoxes(){

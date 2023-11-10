@@ -15,9 +15,7 @@ class Tracker{
         int numOfLastStableBoundingBoxes = 0;
         int numOfCurrentBoundingBoxes = 0;
 
-        Tracker(int *pointsWithClass, int size);
-
-        ~Tracker();
+        Tracker();
 
         void setTrackPoints(int *pointsWithClass, int size);
 

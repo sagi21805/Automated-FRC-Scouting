@@ -12,10 +12,6 @@ BoundingBox::BoundingBox(int *pointWithClass, int id){
     this->type = (char) pointWithClass[4];
 }
 
-BoundingBox::~BoundingBox(){
-    cout << "DESTROYED\n";
-}
-
 void BoundingBox::setBox(int *pointWithClass){
 
     memcpy(this->box, pointWithClass, 4 * sizeof(int));

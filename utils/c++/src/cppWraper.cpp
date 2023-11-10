@@ -17,8 +17,8 @@ extern "C"{
     Robot* _Robot(int teamNumber, bool team, int p1[], int p2[]){
         return new Robot(teamNumber,team ,p1 ,p2);
     }
-    Tracker* _Tracker(int *pointsWithClasses, int size){
-        return new Tracker(pointsWithClasses, size);
+    Tracker* _Tracker(){
+        return new Tracker();
     }
     void _setTrackPoints(Tracker* t, int* points, int size){
         t -> setTrackPoints(points, size);

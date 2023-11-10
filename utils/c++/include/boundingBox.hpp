@@ -21,9 +21,7 @@ class BoundingBox{
 
         BoundingBox();
         BoundingBox(int *pointWithClasses, int id);
-        
-        ~BoundingBox();
-        
+                
         void setBox(int *pointWithClasses);
 
         int* getBox();
